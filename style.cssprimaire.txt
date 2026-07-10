@@ -1,0 +1,572 @@
+:root {
+    --bg-main: #f4f7fc;
+    --primary: #ff5a5f;
+    --primary-hover: #e04e52;
+    --secondary: #00b4d8;
+    --secondary-hover: #0096b4;
+    --success: #2ec4b6;
+    --dark: #1e293b;
+    --text-muted: #64748b;
+    --white: #ffffff;
+    --font-title: 'Fredoka', sans-serif;
+    --font-body: 'Quicksand', sans-serif;
+    --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 10px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+    --radius-lg: 24px;
+    --radius-md: 16px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--bg-main);
+    color: var(--dark);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Cercles décoratifs pros en arrière-plan */
+.bg-circles {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    overflow: hidden;
+    pointer-events: none;
+}
+.circle {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.4;
+}
+.c1 { width: 400px; height: 400px; background: #ffccd5; top: -10%; right: -5%; }
+.c2 { width: 500px; height: 500px; background: #caf0f8; bottom: -10%; left: -10%; }
+
+/* Conteneur principal */
+.main-wrapper {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 24px;
+}
+
+.container {
+    width: 100%;
+    max-width: 520px;
+}
+
+/* Carte principale (Hero) */
+.hero-section {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    padding: 48px 36px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    text-align: center;
+}
+
+.main-title {
+    font-family: var(--font-title);
+    font-size: 3.2rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 8px;
+    letter-spacing: -0.5px;
+}
+
+.slogan {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--secondary);
+    margin-bottom: 32px;
+}
+
+/* Carte explicative intermédiaire */
+.description-card {
+    background: rgba(255, 255, 255, 0.6);
+    border: 1px solid #e2e8f0;
+    border-radius: var(--radius-md);
+    padding: 24px;
+    margin-bottom: 32px;
+}
+
+.description-text {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: var(--dark);
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.highlight {
+    color: var(--primary);
+    font-weight: 700;
+}
+
+/* Badges d'activités */
+.features {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.badge {
+    padding: 6px 14px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    background: var(--white);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid #edf2f7;
+}
+
+/* Boutons UX premium */
+.cta-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.btn {
+    font-family: var(--font-body);
+    font-size: 1.05rem;
+    font-weight: 600;
+    padding: 16px 28px;
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 100%;
+    display: block;
+}
+
+.btn-primary {
+    background: var(--primary);
+    color: var(--white);
+    box-shadow: 0 4px 12px rgba(255, 90, 95, 0.2);
+}
+.btn-primary:hover {
+    background: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 90, 95, 0.3);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--dark);
+    border: 2px solid #e2e8f0;
+}
+.btn-secondary:hover {
+    background: var(--white);
+    border-color: var(--secondary);
+    color: var(--secondary);
+    transform: translateY(-2px);
+}
+
+/* Système de Modale Modifiée */
+.modal {
+    display: none; 
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(15, 23, 42, 0.4);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+}
+
+/* Quand la modale s'ouvre, cette classe est injectée par le JS */
+.modal.active {
+    display: flex;
+}
+
+.modal-content {
+    background: var(--white);
+    padding: 40px 32px;
+    border-radius: var(--radius-lg);
+    width: 100%;
+    max-width: 440px;
+    position: relative;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    animation: modalFadeIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes modalFadeIn {
+    from { transform: scale(0.9) translateY(20px); opacity: 0; }
+    to { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+.modal-content h2 {
+    font-family: var(--font-title);
+    font-size: 1.8rem;
+    color: var(--dark);
+    margin-bottom: 24px;
+}
+
+.close-btn {
+    position: absolute;
+    right: 24px;
+    top: 24px;
+    font-size: 24px;
+    cursor: pointer;
+    color: var(--text-muted);
+    transition: color 0.2s;
+    line-height: 1;
+}
+.close-btn:hover { color: var(--dark); }
+
+/* Champs de formulaires */
+.form-group {
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: 600;
+    margin-bottom: 6px;
+    font-size: 0.9rem;
+    color: var(--dark);
+}
+
+.form-group input[type="text"],
+.form-group input[type="tel"],
+.form-group input[type="password"] {
+    padding: 14px 16px;
+    border: 1.5px solid #e2e8f0;
+    border-radius: 12px;
+    font-family: var(--font-body);
+    font-size: 1rem;
+    outline: none;
+    background: #f8fafc;
+    transition: all 0.2s;
+    color: var(--dark);
+}
+
+.form-group input:focus {
+    border-color: var(--secondary);
+    background: var(--white);
+    box-shadow: 0 0 0 4px rgba(0, 180, 216, 0.1);
+}
+
+.form-group small {
+    color: var(--text-muted);
+    margin-top: 4px;
+    font-size: 0.8rem;
+}
+
+.checkbox-group {
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.checkbox-group input {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--success);
+    cursor: pointer;
+}
+
+.btn-submit {
+    background: var(--success);
+    color: var(--white);
+    margin-top: 12px;
+}
+.btn-submit:hover {
+    background: #25a195;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(46, 196, 182, 0.25);
+}
+
+/* ==========================================================================
+   AJOUTS DE SÉCURITÉ RESPONSIVE (SANS CHANGER LE SCRIPT NI LE HTML)
+   ========================================================================== */
+
+/* Liaison directe avec la fonction JS qui ajoute ".open" */
+.modal.open {
+    display: flex !important;
+}
+
+/* Optimisation pour les smartphones (Écrans de moins de 576px) */
+@media (max-width: 575.98px) {
+    .main-wrapper {
+        padding: 12px; /* Moins de marge externe sur mobile */
+    }
+    
+    .hero-section {
+        padding: 32px 16px; /* Réduction des espaces intérieurs */
+    }
+
+    .main-title {
+        font-size: 2.2rem; /* Titre plus petit pour éviter les coupures */
+    }
+
+    .slogan {
+        font-size: 1.1rem;
+        margin-bottom: 24px;
+    }
+
+    .description-card {
+        padding: 16px;
+        margin-bottom: 24px;
+    }
+
+    .description-text {
+        font-size: 0.95rem;
+    }
+
+    .badge {
+        padding: 5px 10px;
+        font-size: 0.8rem;
+    }
+
+    .btn {
+        padding: 14px 20px;
+        font-size: 1rem;
+    }
+
+    /* Ajustement de la boîte d'inscription sur mobile */
+    .modal {
+        padding: 8px;
+        overflow-y: auto; /* Permet le défilement vertical si le clavier mobile s'ouvre */
+    }
+
+    .modal-content {
+        padding: 32px 16px 24px 16px;
+        margin: auto; /* Centre verticalement */
+    }
+
+    .modal-content h2 {
+        font-size: 1.5rem;
+        margin-bottom: 16px;
+    }
+
+    .form-group {
+        margin-bottom: 14px;
+    }
+
+    .form-group input[type="text"],
+    .form-group input[type="tel"],
+    .form-group input[type="password"] {
+        padding: 12px;
+        font-size: 0.95rem;
+    }
+    
+    /* Adaptation de l'arrière-plan sur les petits écrans */
+    .c1 { width: 250px; height: 250px; }
+    .c2 { width: 300px; height: 300px; }
+}
+
+/* Optimisation pour les écrans ultra-courts ou l'affichage paysage sur téléphone */
+@media (max-height: 600px) {
+    .main-wrapper {
+        align-items: flex-start; /* Évite de masquer le haut sur petit écran de profil */
+        padding-top: 24px;
+        padding-bottom: 24px;
+    }
+    .modal {
+        align-items: flex-start;
+        padding-top: 24px;
+        padding-bottom: 24px;
+    }
+}
+
+
+
+/* ============================= */
+/* FOOTER */
+/* ============================= */
+
+.main-footer {
+
+    text-align: center;
+
+    padding: 30px 15px;
+
+}
+
+
+
+.about-btn {
+
+    background: linear-gradient(
+        135deg,
+        #4776E6,
+        #8E54E9
+    );
+
+    color: white;
+
+    border: none;
+
+    padding: 12px 22px;
+
+    border-radius: 22px;
+
+    font-size: 14px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    letter-spacing: 0.3px;
+
+    box-shadow:
+        0 6px 18px rgba(71,118,230,0.35),
+        inset 0 2px 4px rgba(255,255,255,0.25);
+
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+
+
+    /* remonte le bouton */
+    transform: translateY(-45px);
+
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+}
+
+
+
+/* Effet au clic */
+
+.about-btn:hover {
+
+    transform: translateY(-18px) scale(1.03);
+
+    box-shadow:
+        0 10px 25px rgba(71,118,230,0.45);
+
+}
+
+
+
+/* Mobile */
+
+@media(max-width:600px){
+
+    .about-btn {
+
+        font-size:13px;
+
+        padding:10px 18px;
+
+        border-radius:20px;
+
+    }
+
+}
+
+/* ============================= */
+/* MODAL CACHE AU DEPART */
+/* ============================= */
+
+
+.about-modal {
+
+    display:none;
+
+    position:fixed;
+
+    top:0;
+
+    left:0;
+
+    width:100%;
+
+    height:100%;
+
+    background:rgba(0,0,0,0.65);
+
+    z-index:9999;
+
+    overflow-y:auto;
+
+    padding:20px;
+
+}
+
+
+
+/* Quand on ouvre */
+
+.about-modal.active {
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:flex-start;
+
+}
+
+
+
+/* Contenu */
+
+.about-content {
+
+    background:white;
+
+    max-width:700px;
+
+    width:100%;
+
+    margin-top:40px;
+
+    padding:25px;
+
+    border-radius:25px;
+
+    color:#333;
+
+    line-height:1.6;
+
+}
+
+
+
+/* Fermeture */
+
+.close-about {
+
+    float:right;
+
+    font-size:30px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    color:#ff4757;
+
+}

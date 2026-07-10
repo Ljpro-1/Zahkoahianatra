@@ -1,0 +1,2646 @@
+// ==========================================
+// PROBLEM.JS - PARTIE 1A
+// Générateur de problèmes mathématiques
+// ==========================================
+
+
+// ==========================================
+// 1. DONNÉES POUR CRÉER DES HISTOIRES VARIÉES
+// ==========================================
+
+
+// ==========================================
+// NOUVEAU SYSTEME 50 TYPES DE PROBLEMES
+// ==========================================
+
+let problemeActuel = null;
+
+
+const ACTEURS = [
+    "Maman",
+    "Papa",
+    "Léa",
+    "Lucas",
+    "Grand-père",
+    "Le maître"
+];
+
+
+const LIEUX = [
+    "au marché",
+    "à la boutique",
+    "à la papeterie",
+    "au supermarché"
+];
+
+
+const PRODUITS = [
+    "pommes",
+    "bananes",
+    "cahiers",
+    "stylos",
+    "biscuits",
+    "crayons"
+];
+
+
+function choisir(tableau){
+
+    return tableau[
+        Math.floor(Math.random()*tableau.length)
+    ];
+
+}
+
+// Générer des nombres variables
+
+function hasard(min, max){
+
+    return Math.floor(Math.random()*(max-min+1))+min;
+
+}
+
+function prixHasard(){
+
+    return hasard(5,50)*100;
+
+}
+
+
+// ==========================================
+// 3. GÉNÉRATEUR DE NOUVEAUX PROBLÈMES
+// ==========================================
+
+// ==========================================
+// LISTE DES 50 TYPES DE PROBLEMES
+// ==========================================
+
+const TYPES_PROBLEMES = [
+
+    // 1 à 10
+    problemeAchatMarche,
+    problemeReduction,
+    problemeComparaisonPrix,
+    problemePrixTotal,
+    problemeMonnaieRendue,
+
+    problemeFournituresEcole,
+    problemeDistributionEleves,
+    problemeBibliotheque,
+    problemePagesLues,
+    problemeNotes,
+
+
+    // 11 à 20
+    problemeFruits,
+    problemeRecetteCuisine,
+    problemePartageGateau,
+    problemeFete,
+    problemeStockNourriture,
+
+    problemeRecolteRiz,
+    problemeVenteLegumes,
+    problemePlantation,
+    problemeEngrais,
+    problemeFerme,
+
+
+    // 21 à 30
+    problemeTravauxMaison,
+    problemeMateriaux,
+    problemePeinture,
+    problemeDepensesMaison,
+    problemeEpargne,
+
+    problemeTransport,
+    problemeDistance,
+    problemeTempsTrajet,
+    problemeCarburant,
+    problemeCommandeSimple,
+
+
+    // 31 à 40
+    problemeQuantiteInconnue,
+    problemePrixInconnu,
+    problemeComparaisonEleves,
+    problemeInformationInutile,
+    problemeErreurCalcul,
+
+    problemeTroisAchats,
+    problemeLotReduction,
+    problemeStockInitial,
+    problemePiegePrix,
+    problemeTroisOperations,
+
+
+    // 41 à 49
+    
+    problemeBudgetFamilial,
+    problemeQuantiteArgent,
+
+    problemeDeuxMagasins,
+    problemePartage,
+    problemeBudget,
+    problemeDefiFinal
+
+];
+
+function genererNouveauProbleme(){
+
+    const generateur =
+    choisir(TYPES_PROBLEMES);
+
+
+    problemeActuel =
+    generateur();
+
+
+    document
+    .getElementById("enonce-text")
+    .innerText =
+    problemeActuel.enonce;
+
+
+    construireFormulaireGlobal();
+
+}
+
+
+
+
+
+
+
+
+// ==========================================
+// BLOC 1 : PROBLÈMES 1 À 10
+// ==========================================
+
+
+// 1 - Achat au marché avec piège prix par lot
+
+function problemeAchatMarche(){
+
+    let personne = choisir(ACTEURS);
+    let produit = choisir(PRODUITS);
+
+    let lot = 3;
+    let achat = 5;
+
+    let prixUnite = (Math.floor(Math.random()*10)+5)*100;
+
+    let prixLot = lot * prixUnite;
+
+    let total = achat * prixUnite;
+
+
+    return {
+
+        enonce:
+        `${personne} va au marché. Une affiche indique que ${lot} unités de ${produit} coûtent ${prixLot} ariary. Il achète ${achat} unités de ${produit}.`,
+
+        etapes:[
+
+            {
+                id:"A",
+                consigne:"Trouve le prix d'une unité.",
+                phrase:"Prix d'une unité :",
+                explication:
+                `${prixLot} ÷ ${lot} = ${prixUnite} ariary.`,
+                resultat:prixUnite
+            },
+
+            {
+                id:"B",
+                consigne:"Trouve le prix des unités achetées.",
+                phrase:"Prix total :",
+                explication:
+                `${prixUnite} × ${achat} = ${total} ariary.`,
+                resultat:total
+            }
+
+        ]
+
+    };
+
+}
+
+
+
+// 2 - Réduction simple
+
+function problemeReduction(){
+
+    let prix = (Math.floor(Math.random()*20)+10)*100;
+
+    let reduction = 1000;
+
+    let final = prix - reduction;
+
+
+    return {
+
+        enonce:
+        `Un jouet coûte ${prix} ariary. Le vendeur donne une réduction de ${reduction} ariary.`,
+
+        etapes:[
+
+            {
+                id:"A",
+                consigne:"Trouve le nouveau prix.",
+                phrase:"Prix après réduction :",
+                explication:
+                `${prix} - ${reduction} = ${final} ariary.`,
+                resultat:final
+            }
+
+        ]
+
+    };
+
+}
+
+
+
+// 3 - Comparer deux prix
+
+function problemeComparaisonPrix(){
+
+    let a = (Math.floor(Math.random()*15)+5)*100;
+    let b = (Math.floor(Math.random()*15)+5)*100;
+
+    let difference = Math.abs(a-b);
+
+
+    return {
+
+        enonce:
+        `Un cahier coûte ${a} ariary et un livre coûte ${b} ariary.`,
+
+        etapes:[
+
+            {
+                id:"A",
+                consigne:"Trouve la différence de prix.",
+                phrase:"Différence :",
+                explication:
+                `On fait la différence entre les deux prix : ${difference} ariary.`,
+                resultat:difference
+            }
+
+        ]
+
+    };
+
+}
+
+
+
+// 4 - Prix total d'une commande
+
+function problemePrixTotal(){
+
+    let quantite = Math.floor(Math.random()*6)+2;
+
+    let prix = (Math.floor(Math.random()*10)+5)*100;
+
+    let total = quantite * prix;
+
+
+    return {
+
+        enonce:
+        `Une personne achète ${quantite} objets à ${prix} ariary chacun.`,
+
+        etapes:[
+
+            {
+                id:"A",
+                consigne:"Trouve le prix total.",
+                phrase:"Total :",
+                explication:
+                `${quantite} × ${prix} = ${total} ariary.`,
+                resultat:total
+            }
+
+        ]
+
+    };
+
+}
+
+
+
+// 5 - Monnaie rendue
+
+function problemeMonnaieRendue(){
+
+    let achat = (Math.floor(Math.random()*15)+5)*100;
+
+    let argent = achat + (Math.floor(Math.random()*10)+5)*100;
+
+    let reste = argent - achat;
+
+
+    return {
+
+        enonce:
+        `Une personne donne ${argent} ariary pour payer un achat de ${achat} ariary.`,
+
+        etapes:[
+
+            {
+                id:"A",
+                consigne:"Trouve la monnaie rendue.",
+                phrase:"Monnaie :",
+                explication:
+                `${argent} - ${achat} = ${reste} ariary.`,
+                resultat:reste
+            }
+
+        ]
+
+    };
+
+}
+
+
+
+// 6 - Fournitures scolaires
+
+function problemeFournituresEcole(){
+
+    let nombre = hasard(3,15);
+
+let prix = prixHasard();
+
+    let total = nombre * prix;
+
+
+    return {
+
+        enonce:
+        `Un élève achète ${nombre} cahiers à ${prix} ariary chacun.`,
+
+        etapes:[
+
+            {
+                id:"A",
+                consigne:"Calcule la dépense.",
+                phrase:"Dépense :",
+                explication:
+                `${nombre} × ${prix} = ${total} ariary.`,
+                resultat:total
+            }
+
+        ]
+
+    };
+
+}
+
+
+
+// 7 - Distribution aux élèves
+
+function problemeDistributionEleves(){
+
+    let eleves = Math.floor(Math.random()*10)+5;
+
+    let crayons = eleves * 2;
+
+
+    return {
+
+        enonce:
+        `Un maître donne 2 crayons à chacun de ses ${eleves} élèves.`,
+
+        etapes:[
+
+            {
+                id:"A",
+                consigne:"Combien faut-il de crayons ?",
+                phrase:"Nombre de crayons :",
+                explication:
+                `${eleves} × 2 = ${crayons}.`,
+                resultat:crayons
+            }
+
+        ]
+
+    };
+
+}
+
+
+
+// 8 - Bibliothèque
+
+function problemeBibliotheque(){
+
+    let livres = 50;
+
+    let emprunt = Math.floor(Math.random()*20)+5;
+
+    let reste = livres-emprunt;
+
+
+    return {
+
+        enonce:
+        `Une bibliothèque possède ${livres} livres. Les élèves empruntent ${emprunt} livres.`,
+
+        etapes:[
+
+            {
+                id:"A",
+                consigne:"Trouve les livres restants.",
+                phrase:"Livres restants :",
+                explication:
+                `${livres} - ${emprunt} = ${reste}.`,
+                resultat:reste
+            }
+
+        ]
+
+    };
+
+}
+
+
+
+// 9 - Pages lues
+
+function problemePagesLues(){
+
+    let jours = 5;
+
+    let pages = 10;
+
+    let total = jours*pages;
+
+
+    return {
+
+        enonce:
+        `Un enfant lit ${pages} pages chaque jour pendant ${jours} jours.`,
+
+        etapes:[
+
+            {
+                id:"A",
+                consigne:"Trouve le nombre total de pages.",
+                phrase:"Pages lues :",
+                explication:
+                `${jours} × ${pages} = ${total}.`,
+                resultat:total
+            }
+
+        ]
+
+    };
+
+}
+
+
+
+// 10 - Notes
+
+function problemeNotes(){
+
+    let note1=12;
+    let note2=16;
+
+    let total=note1+note2;
+
+
+    return {
+
+        enonce:
+        `Un élève obtient ${note1} points puis ${note2} points.`,
+
+        etapes:[
+
+            {
+                id:"A",
+                consigne:"Trouve le total des points.",
+                phrase:"Total :",
+                explication:
+                `${note1} + ${note2} = ${total}.`,
+                resultat:total
+            }
+
+        ]
+
+    };
+
+}
+
+
+
+// ==========================================
+// BLOC 2 : PROBLÈMES 11 À 20
+// ==========================================
+
+
+// 11 - Fruits achetés
+
+function problemeFruits(){
+
+    let kg = Math.floor(Math.random()*6)+2;
+    let prixKg = (Math.floor(Math.random()*10)+5)*100;
+    let total = kg * prixKg;
+
+
+    return {
+
+        enonce:
+        `Une famille achète ${kg} kg de fruits. Un kilogramme coûte ${prixKg} ariary.`,
+
+        etapes:[
+
+            {
+                id:"A",
+                consigne:"Trouve le prix total des fruits.",
+                phrase:"Prix total :",
+                explication:
+                `${kg} × ${prixKg} = ${total} ariary.`,
+                resultat:total
+            }
+
+        ]
+
+    };
+
+}
+
+
+
+
+// 12 - Recette de cuisine
+
+function problemeRecetteCuisine(){
+
+    let personnes = Math.floor(Math.random()*5)+3;
+    let oeufsParPersonne = 2;
+
+    let total = personnes * oeufsParPersonne;
+
+
+    return {
+
+        enonce:
+        `Pour une recette, chaque personne utilise ${oeufsParPersonne} œufs. Il y a ${personnes} personnes.`,
+
+        etapes:[
+
+            {
+                id:"A",
+                consigne:"Trouve le nombre total d'œufs.",
+                phrase:"Nombre d'œufs :",
+                explication:
+                `${personnes} × ${oeufsParPersonne} = ${total} œufs.`,
+                resultat:total
+            }
+
+        ]
+
+    };
+
+}
+
+
+
+
+// 13 - Partage d'un gâteau
+
+function problemePartageGateau(){
+
+    let parts = Math.floor(Math.random()*20)+10;
+    let enfants = Math.floor(Math.random()*5)+2;
+
+    let resultat = Math.floor(parts / enfants);
+
+
+    return {
+
+        enonce:
+        `Un gâteau est coupé en ${parts} morceaux pour ${enfants} enfants.`,
+
+        etapes:[
+
+            {
+                id:"A",
+                consigne:"Combien de morceaux reçoit chaque enfant ?",
+                phrase:"Part par enfant :",
+                explication:
+                `${parts} ÷ ${enfants} = ${resultat} morceaux.`,
+                resultat:resultat
+            }
+
+        ]
+
+    };
+
+}
+
+
+
+
+
+// 14 - Fête et boissons
+
+function problemeFete(){
+
+    let invites = Math.floor(Math.random()*10)+10;
+    let bouteilles = 2;
+
+    let total = invites * bouteilles;
+
+
+    return {
+
+        enonce:
+        `Pour une fête, chaque invité boit ${bouteilles} verres. Il y a ${invites} invités.`,
+
+        etapes:[
+
+            {
+                id:"A",
+                consigne:"Trouve le nombre total de verres.",
+                phrase:"Nombre de verres :",
+                explication:
+                `${invites} × ${bouteilles} = ${total}.`,
+                resultat:total
+            }
+
+        ]
+
+    };
+
+}
+
+
+
+
+// 15 - Stock de nourriture
+
+function problemeStockNourriture(){
+
+    let stock = Math.floor(Math.random()*50)+50;
+    let utilise = Math.floor(Math.random()*30)+10;
+
+    let reste = stock-utilise;
+
+
+    return {
+
+        enonce:
+        `Un magasin possède ${stock} paquets. Il vend ${utilise} paquets.`,
+
+        etapes:[
+
+            {
+                id:"A",
+                consigne:"Trouve le nombre de paquets restants.",
+                phrase:"Reste :",
+                explication:
+                `${stock} - ${utilise} = ${reste}.`,
+                resultat:reste
+            }
+
+        ]
+
+    };
+
+}
+
+
+
+
+// 16 - Récolte de riz
+
+function problemeRecolteRiz(){
+
+    let sacs1 = Math.floor(Math.random()*20)+10;
+    let sacs2 = Math.floor(Math.random()*20)+10;
+
+    let total = sacs1+sacs2;
+
+
+    return {
+
+        enonce:
+        `Un agriculteur récolte ${sacs1} sacs de riz le matin et ${sacs2} sacs l'après-midi.`,
+
+        etapes:[
+
+            {
+                id:"A",
+                consigne:"Trouve le nombre total de sacs.",
+                phrase:"Total :",
+                explication:
+                `${sacs1} + ${sacs2} = ${total} sacs.`,
+                resultat:total
+            }
+
+        ]
+
+    };
+
+}
+
+
+
+
+// 17 - Vente de légumes
+
+function problemeVenteLegumes(){
+
+    let quantite = Math.floor(Math.random()*10)+5;
+    let prix = prixHasard();
+
+    let total = quantite*prix;
+
+
+    return {
+
+        enonce:
+        `Un vendeur vend ${quantite} paniers de légumes à ${prix} ariary chacun.`,
+
+        etapes:[
+
+            {
+                id:"A",
+                consigne:"Trouve l'argent gagné.",
+                phrase:"Gain :",
+                explication:
+                `${quantite} × ${prix} = ${total} ariary.`,
+                resultat:total
+            }
+
+        ]
+
+    };
+
+}
+
+
+
+
+
+// 18 - Plantation
+
+function problemePlantation(){
+
+    let lignes = Math.floor(Math.random()*5)+3;
+    let plants = Math.floor(Math.random()*5)+4;
+
+    let total = lignes*plants;
+
+
+    return {
+
+        enonce:
+        `Un jardinier plante ${plants} plantes dans chaque ligne. Il prépare ${lignes} lignes.`,
+
+        etapes:[
+
+            {
+                id:"A",
+                consigne:"Trouve le nombre total de plantes.",
+                phrase:"Nombre de plantes :",
+                explication:
+                `${lignes} × ${plants} = ${total}.`,
+                resultat:total
+            }
+
+        ]
+
+    };
+
+}
+
+
+
+
+
+// 19 - Engrais
+
+function problemeEngrais(){
+
+    let sacs = Math.floor(Math.random()*8)+3;
+    let prix = 2000;
+
+    let total=sacs*prix;
+
+
+    return {
+
+        enonce:
+        `Un agriculteur achète ${sacs} sacs d'engrais à ${prix} ariary chacun.`,
+
+        etapes:[
+
+            {
+                id:"A",
+                consigne:"Calcule la dépense.",
+                phrase:"Dépense :",
+                explication:
+                `${sacs} × ${prix} = ${total} ariary.`,
+                resultat:total
+            }
+
+        ]
+
+    };
+
+}
+
+
+
+
+// 20 - Ferme
+
+function problemeFerme(){
+
+    let poules = Math.floor(Math.random()*20)+10;
+    let vendues = Math.floor(Math.random()*8)+3;
+
+    let reste = poules-vendues;
+
+
+    return {
+
+        enonce:
+        `Une ferme possède ${poules} poules. Elle vend ${vendues} poules.`,
+
+        etapes:[
+
+            {
+                id:"A",
+                consigne:"Trouve les poules restantes.",
+                phrase:"Reste :",
+                explication:
+                `${poules} - ${vendues} = ${reste}.`,
+                resultat:reste
+            }
+
+        ]
+
+    };
+
+}
+
+
+// ==========================================
+// BLOC 3 : PROBLÈMES 21 À 30
+// ==========================================
+
+
+// ==========================================
+// BLOC 3 : PROBLÈMES 21 À 30
+// NIVEAU MOYEN + PIÈGES
+// ==========================================
+
+
+// 21 - Prix par lot caché
+
+function problemeTravauxMaison(){
+
+    let lot = 5;
+    let prixLot = 7500;
+    let achat = Math.floor(Math.random()*5)+7;
+
+    let prixUnite = prixLot / lot;
+    let total = prixUnite * achat;
+
+
+    return {
+
+        enonce:
+        `Un magasin vend ${lot} sacs de ciment pour ${prixLot} ariary. Une personne veut acheter ${achat} sacs.`,
+
+        etapes:[
+
+            {
+                id:"A",
+                consigne:"Trouve le prix d'un sac.",
+                phrase:"Prix d'un sac :",
+                explication:
+                `${prixLot} ÷ ${lot} = ${prixUnite} ariary.`,
+                resultat:prixUnite
+            },
+
+            {
+                id:"B",
+                consigne:"Trouve le prix des sacs achetés.",
+                phrase:"Prix total :",
+                explication:
+                `${prixUnite} × ${achat} = ${total} ariary.`,
+                resultat:total
+            }
+
+        ]
+
+    };
+
+}
+
+
+
+
+// 22 - Comparaison de deux magasins
+
+function problemeMateriaux(){
+
+    let boutiqueA = 9000;
+    let boutiqueB = 1600;
+    let quantite = 6;
+
+    let totalA = boutiqueA;
+    let totalB = boutiqueB * quantite;
+
+    let difference = Math.abs(totalA-totalB);
+
+
+    return {
+
+        enonce:
+        `Un magasin vend 6 cahiers pour ${boutiqueA} ariary. Un autre vend un cahier à ${boutiqueB} ariary. Trouve le magasin le moins cher.`,
+
+        etapes:[
+
+            {
+                id:"A",
+                consigne:"Calcule le prix du deuxième magasin.",
+                phrase:"Prix boutique B :",
+                explication:
+                `${boutiqueB} × ${quantite} = ${totalB} ariary.`,
+                resultat:totalB
+            },
+
+            {
+                id:"B",
+                consigne:"Trouve la différence.",
+                phrase:"Différence :",
+                explication:
+                `La différence entre les deux prix est ${difference} ariary.`,
+                resultat:difference
+            }
+
+        ]
+
+    };
+
+}
+
+
+
+
+
+// 23 - Réduction puis achat
+
+function problemePeinture(){
+
+    let prix = 12000;
+    let reduction = 2000;
+    let quantite = 3;
+
+    let nouveauPrix = prix-reduction;
+    let total = nouveauPrix*quantite;
+
+
+    return {
+
+        enonce:
+        `Un pot de peinture coûte ${prix} ariary. Le vendeur réduit le prix de ${reduction} ariary. Une personne achète ${quantite} pots.`,
+
+        etapes:[
+
+            {
+                id:"A",
+                consigne:"Trouve le nouveau prix d'un pot.",
+                phrase:"Prix réduit :",
+                explication:
+                `${prix} - ${reduction} = ${nouveauPrix}.`,
+                resultat:nouveauPrix
+            },
+
+            {
+                id:"B",
+                consigne:"Trouve le prix total.",
+                phrase:"Total :",
+                explication:
+                `${nouveauPrix} × ${quantite} = ${total}.`,
+                resultat:total
+            }
+
+        ]
+
+    };
+
+}
+
+
+
+
+
+// 24 - Budget avec plusieurs dépenses
+
+function problemeDepensesMaison(){
+
+    let argent = prixHasard()*15;
+
+let nourriture = prixHasard()*3;
+let transport = prixHasard();
+let fournitures = prixHasard()*2;
+
+    let reste=argent-(nourriture+transport+fournitures);
+
+
+    return {
+
+        enonce:
+        `Une famille possède ${argent} ariary. Elle dépense ${nourriture} ariary pour manger, ${transport} ariary pour le transport et ${fournitures} ariary pour des fournitures.`,
+
+        etapes:[
+
+            {
+                id:"A",
+                consigne:"Trouve la dépense totale.",
+                phrase:"Dépense totale :",
+                explication:
+                `${nourriture}+${transport}+${fournitures} = ${nourriture+transport+fournitures}.`,
+                resultat:nourriture+transport+fournitures
+            },
+
+            {
+                id:"B",
+                consigne:"Trouve l'argent restant.",
+                phrase:"Reste :",
+                explication:
+                `${argent}-${nourriture+transport+fournitures}=${reste}.`,
+                resultat:reste
+            }
+
+        ]
+
+    };
+
+}
+
+
+
+
+
+// 25 - Stock avec vente
+
+function problemeEpargne(){
+
+    let stock = hasard(100,300);
+
+let vente1 = hasard(20,70);
+
+let vente2 = hasard(10,50);
+
+while(vente1 + vente2 >= stock){
+    vente2 = hasard(10,30);
+}
+
+    let reste=stock-vente1-vente2;
+
+
+    return {
+
+        enonce:
+        `Un magasin possède ${stock} produits. Il vend ${vente1} produits puis ${vente2} produits.`,
+
+        etapes:[
+
+            {
+                id:"A",
+                consigne:"Trouve combien de produits restent.",
+                phrase:"Stock restant :",
+                explication:
+                `${stock}-${vente1}-${vente2}=${reste}.`,
+                resultat:reste
+            }
+
+        ]
+
+    };
+
+}
+
+
+
+
+
+// 26 - Voyage avec plusieurs frais
+
+function problemeTransport(){
+
+    let billet = prixHasard()*3;
+let repas = prixHasard();
+let hotel = prixHasard()*2;
+
+    let total=billet+repas+hotel;
+
+
+    return {
+
+        enonce:
+        `Pour un voyage, une personne paie ${billet} ariary de transport, ${repas} ariary de repas et ${hotel} ariary d'hôtel.`,
+
+        etapes:[
+
+            {
+                id:"A",
+                consigne:"Trouve le coût total du voyage.",
+                phrase:"Total :",
+                explication:
+                `${billet}+${repas}+${hotel}=${total}.`,
+                resultat:total
+            }
+
+        ]
+
+    };
+
+}
+
+
+// 27 - Distance aller-retour avec détour
+
+function problemeDistance(){
+
+    let aller = Math.floor(Math.random()*20)+15;
+    let retour = aller;
+    let detour = 5;
+
+    let total = aller + retour + detour;
+
+
+    return {
+
+        enonce:
+        `Un élève marche ${aller} km pour aller à l'école. Au retour, il fait un détour de ${detour} km.`,
+
+        etapes:[
+
+            {
+                id:"A",
+                consigne:"Trouve la distance du retour.",
+                phrase:"Retour :",
+                explication:
+                `Le retour est ${aller} + ${detour} = ${retour+detour} km.`,
+                resultat:retour+detour
+            },
+
+            {
+                id:"B",
+                consigne:"Trouve la distance totale parcourue.",
+                phrase:"Distance totale :",
+                explication:
+                `${aller} + ${retour+detour} = ${total} km.`,
+                resultat:total
+            }
+
+        ]
+
+    };
+
+}
+
+
+
+
+
+// 28 - Temps avec pause
+
+function problemeTempsTrajet(){
+
+    let trajet1 = hasard(20,90);
+let pause = hasard(5,30);
+let trajet2 = hasard(20,80);
+
+    let total = trajet1 + pause + trajet2;
+
+
+    return {
+
+        enonce:
+        `Un voyage dure ${trajet1} minutes. La personne fait une pause de ${pause} minutes puis continue pendant ${trajet2} minutes.`,
+
+        etapes:[
+
+            {
+                id:"A",
+                consigne:"Trouve le temps total du voyage.",
+                phrase:"Durée totale :",
+                explication:
+                `${trajet1}+${pause}+${trajet2}=${total} minutes.`,
+                resultat:total
+            }
+
+        ]
+
+    };
+
+}
+
+
+
+
+
+// 29 - Carburant avec prix
+
+function problemeCarburant(){
+
+    let litres = hasard(5,20);
+let prixLitre = prixHasard();
+
+    let total = litres * prixLitre;
+
+
+    return {
+
+        enonce:
+        `Une voiture utilise ${litres} litres de carburant. Un litre coûte ${prixLitre} ariary.`,
+
+        etapes:[
+
+            {
+                id:"A",
+                consigne:"Trouve le prix du carburant utilisé.",
+                phrase:"Prix total :",
+                explication:
+                `${litres} × ${prixLitre} = ${total} ariary.`,
+                resultat:total
+            }
+
+        ]
+
+    };
+
+}
+
+
+
+
+
+// 30 - Commande avec plusieurs produits
+
+function problemeCommande(){
+
+    let cahiers = hasard(2,10);
+let prixCahier = prixHasard();
+
+let stylos = hasard(1,8);
+let prixStylo = prixHasard();
+
+
+    let totalCahier = cahiers * prixCahier;
+    let totalStylo = stylos * prixStylo;
+
+    let total = totalCahier + totalStylo;
+
+
+    return {
+
+        enonce:
+        `Une commande contient ${cahiers} cahiers à ${prixCahier} ariary et ${stylos} stylos à ${prixStylo} ariary.`,
+
+        etapes:[
+
+            {
+                id:"A",
+                consigne:"Trouve le prix des cahiers.",
+                phrase:"Cahiers :",
+                explication:
+                `${cahiers} × ${prixCahier} = ${totalCahier}.`,
+                resultat:totalCahier
+            },
+
+            {
+                id:"B",
+                consigne:"Trouve le prix des stylos.",
+                phrase:"Stylos :",
+                explication:
+                `${stylos} × ${prixStylo} = ${totalStylo}.`,
+                resultat:totalStylo
+            },
+
+            {
+                id:"C",
+                consigne:"Trouve le prix total de la commande.",
+                phrase:"Total :",
+                explication:
+                `${totalCahier}+${totalStylo}=${total}.`,
+                resultat:total
+            }
+
+        ]
+
+    };
+
+}
+// ==========================================
+// BLOC 4 : PROBLÈMES 31 À 40
+// ==========================================
+
+
+// ==========================================
+// BLOC 4 : PROBLÈMES 31 À 40
+// NIVEAU DIFFICILE
+// ==========================================
+
+
+// 31 - Trouver une quantité avec argent restant
+
+function problemeQuantiteInconnue(){
+
+    let prix = prixHasard();
+
+let quantite = hasard(3,10);
+
+let reste = prixHasard()*2;
+
+let argent = (prix * quantite) + reste;
+
+let depense = argent - reste;
+// supprimer : let quantite = depense / prix;
+
+    return {
+
+        enonce:
+        `Mika possède ${argent} ariary. Après avoir acheté des objets à ${prix} ariary chacun, il lui reste ${reste} ariary.`,
+
+        etapes:[
+
+            {
+                id:"A",
+                consigne:"Trouve l'argent dépensé.",
+                phrase:"Dépense :",
+                explication:
+                `${argent} - ${reste} = ${depense} ariary.`,
+                resultat:depense
+            },
+
+            {
+                id:"B",
+                consigne:"Trouve le nombre d'objets achetés.",
+                phrase:"Quantité :",
+                explication:
+                `${depense} ÷ ${prix} = ${quantite} objets.`,
+                resultat:quantite
+            }
+
+        ]
+
+    };
+
+}
+
+
+
+
+
+// 32 - Prix unitaire caché
+
+function problemePrixInconnu(){
+
+    let quantite = hasard(3,12);
+
+let prix = prixHasard();
+
+let total = quantite * prix;
+
+    
+
+    return {
+
+        enonce:
+        `Un commerçant vend ${quantite} sacs pour ${total} ariary.`,
+
+        etapes:[
+
+            {
+                id:"A",
+                consigne:"Trouve le prix d'un sac.",
+                phrase:"Prix d'un sac :",
+                explication:
+                `${total} ÷ ${quantite} = ${prix} ariary.`,
+                resultat:prix
+            }
+
+        ]
+
+    };
+
+}
+
+
+
+
+
+// 33 - Comparaison de deux élèves
+
+function problemeComparaisonEleves(){
+
+    let premier = hasard(30,100);
+
+let second = hasard(10,premier-5);
+
+    let difference = premier-second;
+
+
+    return {
+
+        enonce:
+        `Lina a ${premier} points. Tiana a ${second} points.`,
+
+        etapes:[
+
+            {
+                id:"A",
+                consigne:"Trouve l'écart entre les deux scores.",
+                phrase:"Différence :",
+                explication:
+                `${premier}-${second}=${difference} points.`,
+                resultat:difference
+            }
+
+        ]
+
+    };
+
+}
+
+
+
+
+
+// 34 - Information inutile multiple
+
+function problemeInformationInutile(){
+
+    let age = hasard(8,15);
+
+let taille = hasard(120,170);
+
+let cahiers = hasard(2,10);
+
+let prix = prixHasard();
+
+    let total = cahiers*prix;
+
+
+    return {
+
+        enonce:
+        `Lina a ${age} ans et mesure ${taille} cm. Elle achète ${cahiers} cahiers à ${prix} ariary chacun.`,
+
+        etapes:[
+
+            {
+                id:"A",
+                consigne:"Trouve le prix total.",
+                phrase:"Total :",
+                explication:
+                `L'âge et la taille ne servent pas. ${cahiers} × ${prix} = ${total}.`,
+                resultat:total
+            }
+
+        ]
+
+    };
+
+}
+
+
+
+
+
+// 35 - Trouver une erreur
+
+function problemeErreurCalcul(){
+
+    let prix = prixHasard();
+
+let quantite = hasard(2,8);
+
+let faux = prix + hasard(500,3000);
+
+let vrai = prix * quantite;
+
+
+    return {
+
+        enonce:
+        `Un élève dit : "${quantite} objets à ${prix} ariary coûtent ${faux} ariary". Vérifie son calcul.`,
+
+        etapes:[
+
+            {
+                id:"A",
+                consigne:"Trouve le vrai prix.",
+                phrase:"Bonne réponse :",
+                explication:
+                `Il faut multiplier : 3500 × 3 = ${vrai*3} ariary.`,
+                resultat:vrai*3
+            }
+
+        ]
+
+    };
+
+}
+
+
+
+
+
+// 36 - Trois achats et monnaie
+
+function problemeTroisAchats(){
+
+    let a = prixHasard();
+let b = prixHasard();
+let c = prixHasard();
+
+let argent = (a+b+c) + prixHasard()*5;
+
+    let depense = a+b+c;
+    let reste = argent-depense;
+
+
+    return {
+
+        enonce:
+        `Une personne possède ${argent} ariary. Elle achète trois produits à ${a}, ${b} et ${c} ariary.`,
+
+        etapes:[
+
+            {
+                id:"A",
+                consigne:"Trouve la dépense totale.",
+                phrase:"Dépense :",
+                explication:
+                `${a}+${b}+${c}=${depense}.`,
+                resultat:depense
+            },
+
+            {
+                id:"B",
+                consigne:"Trouve l'argent restant.",
+                phrase:"Reste :",
+                explication:
+                `${argent}-${depense}=${reste}.`,
+                resultat:reste
+            }
+
+        ]
+
+    };
+
+}
+
+
+
+
+
+// 37 - Lot + réduction
+
+function problemeLotReduction(){
+
+    let lot = hasard(3,10);
+
+let prixLot = prixHasard()*lot;
+
+let reduction = prixHasard();
+
+    let vraiPrix = prixLot-reduction;
+    let unite = vraiPrix/lot;
+
+
+    return {
+
+        enonce:
+        `Un magasin vend 6 cahiers pour ${prixLot} ariary. Il fait une réduction de ${reduction} ariary sur le lot.`,
+
+        etapes:[
+
+            {
+                id:"A",
+                consigne:"Trouve le prix du lot après réduction.",
+                phrase:"Nouveau prix :",
+                explication:
+                `${prixLot}-${reduction}=${vraiPrix}.`,
+                resultat:vraiPrix
+            },
+
+            {
+                id:"B",
+                consigne:"Trouve le prix d'un cahier.",
+                phrase:"Prix unitaire :",
+                explication:
+                `${vraiPrix}÷${lot}=${unite}.`,
+                resultat:unite
+            }
+
+        ]
+
+    };
+
+}
+
+
+
+function problemeStockInitial(){
+
+    let reste = hasard(30,150);
+
+let vendu = hasard(10,80);
+
+    let stockInitial = vendu + reste;
+
+
+    return {
+
+        enonce:
+        `Un magasin vend ${vendu} produits. Après la vente, il lui reste ${reste} produits.`,
+
+        etapes:[
+
+            {
+                id:"A",
+                consigne:"Trouve le nombre de produits au début.",
+                phrase:"Stock initial :",
+                explication:
+                `${vendu} + ${reste} = ${stockInitial} produits.`,
+                resultat:stockInitial
+            }
+
+        ]
+
+    };
+
+}
+
+
+
+
+
+
+
+function problemePiegePrix(){
+
+    let lot = hasard(3,8);
+
+let prixLot = prixHasard()*lot;
+
+let achat = hasard(lot+1,15);
+
+    let prixUnite = prixLot / lot;
+    let total = prixUnite * achat;
+
+
+    return {
+
+        enonce:
+        `Une affiche indique : "${lot} kg de riz coûtent ${prixLot} ariary". Une famille achète ${achat} kg de riz.`,
+
+        etapes:[
+
+            {
+                id:"A",
+                consigne:"Trouve le prix d'un kg.",
+                phrase:"Prix d'un kg :",
+                explication:
+                `${prixLot} ÷ ${lot} = ${prixUnite} ariary.`,
+                resultat:prixUnite
+            },
+
+            {
+                id:"B",
+                consigne:"Trouve le prix des ${achat} kg.",
+                phrase:"Prix total :",
+                explication:
+                `${prixUnite} × ${achat} = ${total} ariary.`,
+                resultat:total
+            }
+
+        ]
+
+    };
+
+}
+
+
+
+
+
+
+
+function problemeTroisOperations(){
+
+    let achat1 = prixHasard();
+let achat2 = prixHasard();
+
+let reduction = prixHasard();
+
+let argent = achat1 + achat2 - reduction + prixHasard()*5;
+
+    let depenseAvantReduction = achat1 + achat2;
+    let depenseFinale = depenseAvantReduction - reduction;
+    let reste = argent - depenseFinale;
+
+
+    return {
+
+        enonce:
+        `Une personne possède ${argent} ariary. Elle achète deux produits à ${achat1} et ${achat2} ariary. Le vendeur donne une réduction de ${reduction} ariary sur l'ensemble.`,
+
+        etapes:[
+
+            {
+                id:"A",
+                consigne:"Trouve le prix avant réduction.",
+                phrase:"Prix avant réduction :",
+                explication:
+                `${achat1} + ${achat2} = ${depenseAvantReduction} ariary.`,
+                resultat:depenseAvantReduction
+            },
+
+            {
+                id:"B",
+                consigne:"Trouve le prix après réduction.",
+                phrase:"Prix final :",
+                explication:
+                `${depenseAvantReduction} - ${reduction} = ${depenseFinale} ariary.`,
+                resultat:depenseFinale
+            },
+
+            {
+                id:"C",
+                consigne:"Trouve l'argent restant.",
+                phrase:"Reste :",
+                explication:
+                `${argent} - ${depenseFinale} = ${reste} ariary.`,
+                resultat:reste
+            }
+
+        ]
+
+    };
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function problemeBudgetFamilial(){
+
+    let nourriture = prixHasard()*3;
+let loyer = prixHasard()*2;
+let transport = prixHasard();
+
+let salaire = nourriture + loyer + transport + prixHasard()*5;
+
+    let depense = nourriture+loyer+transport;
+    let reste = salaire-depense;
+
+
+    return {
+
+        enonce:
+        `Une famille reçoit ${salaire} ariary. Elle dépense ${nourriture} ariary pour la nourriture, ${loyer} ariary pour le logement et ${transport} ariary pour le transport.`,
+
+        etapes:[
+
+            {
+                id:"A",
+                consigne:"Trouve la dépense totale.",
+                phrase:"Dépense :",
+                explication:
+                `${nourriture}+${loyer}+${transport}=${depense}.`,
+                resultat:depense
+            },
+
+            {
+                id:"B",
+                consigne:"Trouve l'argent restant.",
+                phrase:"Reste :",
+                explication:
+                `${salaire}-${depense}=${reste}.`,
+                resultat:reste
+            }
+
+        ]
+
+    };
+
+}
+
+
+
+
+
+
+
+function problemeQuantiteArgent(){
+
+    let prix = prixHasard();
+
+let quantite = hasard(3,10);
+
+let argent = (prix * quantite) + prixHasard()*3;
+
+    let depense = prix*quantite;
+
+    let reste = argent-depense;
+
+
+    return {
+
+        enonce:
+        `Un élève possède ${argent} ariary. Il achète ${quantite} cahiers à ${prix} ariary chacun.`,
+
+        etapes:[
+
+            {
+                id:"A",
+                consigne:"Trouve la dépense.",
+                phrase:"Dépense :",
+                explication:
+                `${quantite}×${prix}=${depense}.`,
+                resultat:depense
+            },
+
+            {
+                id:"B",
+                consigne:"Trouve ce qui reste.",
+                phrase:"Reste :",
+                explication:
+                `${argent}-${depense}=${reste}.`,
+                resultat:reste
+            }
+
+        ]
+
+    };
+
+}
+
+
+
+
+
+
+
+function problemeDeuxMagasins(){
+
+    let quantiteA = hasard(3,8);
+let prixA = prixHasard();
+
+let quantiteB = hasard(3,8);
+let prixB = prixHasard();
+
+let magasinA = quantiteA * prixA;
+let magasinB = quantiteB * prixB;
+
+    let difference = Math.abs(magasinA-magasinB);
+
+
+    return {
+
+        enonce:
+        `Magasin A : ${quantiteA} cahiers à ${prixA} ariary chacun. Magasin B : ${quantiteB} cahiers à ${prixB} ariary chacun..`,
+
+        etapes:[
+
+            {
+                id:"A",
+                consigne:"Trouve le prix du magasin A.",
+                phrase:"Prix A :",
+                explication:
+                `5×2000=${magasinA}.`,
+                resultat:magasinA
+            },
+
+            {
+                id:"B",
+                consigne:"Trouve le prix du magasin B.",
+                phrase:"Prix B :",
+                explication:
+                `4×2200=${magasinB}.`,
+                resultat:magasinB
+            },
+
+            {
+                id:"C",
+                consigne:"Trouve la différence.",
+                phrase:"Différence :",
+                explication:
+                `${difference} ariary.`,
+                resultat:difference
+            }
+
+        ]
+
+    };
+
+}
+
+
+
+function problemeCommandeSimple(){
+
+let articles = hasard(2,10);
+
+let quantite = hasard(2,8);
+
+
+    let total=articles*quantite;
+
+
+    return {
+
+        enonce:
+        `Une commande contient ${articles} boîtes. Chaque boîte contient ${quantite} objets.`,
+
+        etapes:[
+
+            {
+                id:"A",
+                consigne:"Trouve le nombre total d'objets.",
+                phrase:"Total :",
+                explication:
+                `${articles} × ${quantite} = ${total}.`,
+                resultat:total
+            }
+
+        ]
+
+    };
+
+}
+
+
+
+
+
+// 48 - Partage équitable
+
+function problemePartage(){
+
+    let personnes = hasard(2,10);
+
+let part = hasard(3,20);
+
+let objets = personnes * part;
+
+let partFinale = objets / personnes;
+
+    return {
+
+        enonce:
+        `${objets} objets sont partagés entre ${personnes} personnes.`,
+
+        etapes:[
+
+            {
+                id:"A",
+                consigne:"Trouve la part de chacun.",
+                phrase:"Part :",
+                explication:
+                `${objets} ÷ ${personnes} = ${part}.`,
+                resultat:part
+            }
+
+        ]
+
+    };
+
+}
+
+
+
+
+
+// 49 - Budget
+
+function problemeBudget(){
+
+    let depense1 = prixHasard();
+
+let depense2 = prixHasard();
+
+let argent = depense1 + depense2 + prixHasard()*3;
+
+    let reste=argent-(depense1+depense2);
+
+
+    return {
+
+        enonce:
+        `Une personne possède ${argent} ariary. Elle dépense ${depense1} ariary puis ${depense2} ariary.`,
+
+        etapes:[
+
+            {
+                id:"A",
+                consigne:"Trouve l'argent restant.",
+                phrase:"Reste :",
+                explication:
+                `${argent} - (${depense1}+${depense2}) = ${reste} ariary.`,
+                resultat:reste
+            }
+
+        ]
+
+    };
+
+}
+
+
+
+
+
+// 50 - Défi final mélange
+
+function problemeDefiFinal(){
+
+    let achat1 = prixHasard();
+
+let achat2 = prixHasard();
+
+let argent = achat1 + achat2 + prixHasard()*5;
+
+    let reste=argent-(achat1+achat2);
+
+
+    return {
+
+        enonce:
+        `Un élève possède ${argent} ariary. Il achète un livre à ${achat1} ariary et des fournitures à ${achat2} ariary.`,
+
+        etapes:[
+
+            {
+                id:"A",
+                consigne:"Trouve la dépense totale.",
+                phrase:"Dépense :",
+                explication:
+                `${achat1} + ${achat2} = ${achat1+achat2} ariary.`,
+                resultat:achat1+achat2
+            },
+
+            {
+                id:"B",
+                consigne:"Trouve ce qui reste.",
+                phrase:"Reste :",
+                explication:
+                `${argent} - ${achat1+achat2} = ${reste} ariary.`,
+                resultat:reste
+            }
+
+        ]
+
+    };
+
+}
+
+
+
+
+// ==========================================
+// 4. INITIALISATION DES BOUTONS
+// ==========================================
+
+
+document.addEventListener("DOMContentLoaded", () => {
+
+
+    document
+    .getElementById("btn-simple")
+    .addEventListener("click", demarrerSimpleProbleme);
+
+
+
+    document
+    .getElementById("btn-back")
+    .addEventListener("click", retournerAuMenu);
+
+
+
+    document
+    .getElementById("btn-submit")
+    .addEventListener("click", validerFormulaireGlobal);
+
+
+
+    document
+    .getElementById("btn-next")
+    .addEventListener("click", chargerSujetSuivant);
+
+
+
+    document
+    .getElementById("modal-close")
+    .addEventListener("click", fermerModale);
+
+
+});
+
+
+
+
+// ==========================================
+// 5. DÉMARRER UN PROBLÈME
+// ==========================================
+
+
+function demarrerSimpleProbleme(){
+
+
+    document
+    .getElementById("selection-screen")
+    .classList.add("hidden");
+
+
+
+    document
+    .getElementById("game-screen")
+    .classList.remove("hidden");
+
+
+
+    genererNouveauProbleme();
+
+
+}
+
+
+
+
+// ==========================================
+// 6. RETOUR AU MENU
+// ==========================================
+
+
+function retournerAuMenu(){
+
+
+    document
+    .getElementById("game-screen")
+    .classList.add("hidden");
+
+
+
+    document
+    .getElementById("selection-screen")
+    .classList.remove("hidden");
+
+
+}
+
+
+
+
+// ==========================================
+// 7. CRÉATION DES CASES DE RÉPONSES
+// ==========================================
+
+
+function construireFormulaireGlobal(){
+
+
+
+    const container =
+    document.getElementById("answers-container");
+
+
+
+    container.innerHTML = "";
+
+
+
+    // Réinitialisation des boutons
+
+    document
+    .getElementById("btn-submit")
+    .classList.remove("hidden");
+
+
+
+    document
+    .getElementById("btn-next")
+    .classList.add("hidden");
+
+
+
+
+
+    problemeActuel.etapes.forEach((etape)=>{
+
+
+        const ligne =
+        document.createElement("div");
+
+
+
+        ligne.className="table-row";
+
+
+
+        ligne.id =
+        "row-"+etape.id;
+
+
+
+
+        ligne.innerHTML = `
+
+            <div class="row-phrase">
+
+                <b>${etape.consigne}</b>
+
+                <br>
+
+                <span>${etape.phrase}</span>
+
+            </div>
+
+
+            <div class="input-container">
+
+
+                <input 
+                type="number"
+                id="res-${etape.id}"
+                placeholder="Réponse">
+
+
+                <span class="input-unit">
+                ar
+                </span>
+
+
+            </div>
+
+        `;
+
+
+
+        container.appendChild(ligne);
+
+
+
+    });
+
+
+
+
+
+    // Met le curseur dans la première réponse
+
+
+    const premier =
+    document.getElementById("res-A");
+
+
+
+    if(premier){
+
+        premier.focus();
+
+    }
+
+
+
+}
+
+
+
+
+// ==========================================
+// 8. CHARGER UN NOUVEAU SUJET
+// ==========================================
+
+
+function chargerSujetSuivant(){
+
+
+    genererNouveauProbleme();
+
+
+}
+
+
+// ==========================================
+// 9. VÉRIFICATION DES RÉPONSES
+// ==========================================
+
+function validerFormulaireGlobal(){
+
+    let toutCorrect = true;
+
+    let correction = "";
+
+
+    problemeActuel.etapes.forEach((etape)=>{
+
+
+        const champ =
+        document.getElementById(`res-${etape.id}`);
+
+
+        let valeur =
+        champ.value
+        .replace(/\s/g,"");
+
+
+        const reponse =
+        Number(valeur);
+
+
+
+        if(reponse !== etape.resultat){
+
+
+            toutCorrect = false;
+
+
+            correction += `
+
+            <div class="correction-item">
+
+                <h3>
+                ❌ Étape ${etape.id}
+                </h3>
+
+
+                <p>
+                <strong>Question :</strong><br>
+                ${etape.consigne}
+                </p>
+
+
+                <p>
+                <strong>Comment réfléchir :</strong><br>
+                ${etape.explication}
+                </p>
+
+
+                <p>
+                <strong>Ton résultat :</strong><br>
+                ${valeur || "Pas de réponse"}
+                </p>
+
+
+                <p class="bonne-reponse">
+
+                ✅ <strong>Réponse correcte :</strong><br>
+                ${etape.resultat}
+
+                </p>
+
+
+            </div>
+
+            `;
+
+
+            champ.style.borderColor =
+            "var(--danger)";
+
+
+        }
+
+
+        else{
+
+
+            champ.style.borderColor =
+            "var(--success)";
+
+
+        }
+
+
+    });
+
+
+
+    if(toutCorrect){
+
+
+        ouvrirModale(
+
+            true,
+
+            "Bravo ! 🎉",
+
+            `
+            Toutes les réponses sont correctes.
+
+            <br><br>
+
+           tena bravo be an👏.
+
+            <br><br>
+
+            Continue avec un nouveau problème !
+            `
+
+        );
+
+
+        document
+        .getElementById("btn-submit")
+        .classList.add("hidden");
+
+
+        document
+        .getElementById("btn-next")
+        .classList.remove("hidden");
+
+
+    }
+
+
+    else{
+
+
+        ouvrirModale(
+
+            false,
+
+            "Correction expliquée 💡",
+
+            `
+            Voici la méthode pour trouver les bonnes réponses :
+
+            <br><br>
+
+            ${correction}
+
+            `
+
+        );
+
+
+    }
+
+}
+
+// ==========================================
+// 10. FENÊTRE DE CORRECTION
+// ==========================================
+
+
+function ouvrirModale(succes, titre, message){
+
+
+    const modal =
+    document.getElementById("custom-modal");
+
+
+
+    const icon =
+    document.getElementById("modal-icon");
+
+
+
+    const titreBox =
+    document.getElementById("modal-title");
+
+
+
+    const messageBox =
+    document.getElementById("modal-message");
+
+
+
+
+
+    titreBox.innerHTML = titre;
+
+
+
+    messageBox.innerHTML = message;
+
+
+
+
+    if(succes){
+
+
+        icon.innerHTML = "🌟";
+
+
+        modal.className =
+        "modal success-theme";
+
+
+    }
+
+    else{
+
+
+        icon.innerHTML = "💡";
+
+
+        modal.className =
+        "modal error-theme";
+
+
+    }
+
+
+
+    modal.classList.remove("hidden");
+
+
+
+}
+
+
+
+
+
+
+// ==========================================
+// 11. FERMER LA FENÊTRE
+// ==========================================
+
+
+function fermerModale(){
+
+
+    document
+    .getElementById("custom-modal")
+    .classList.add("hidden");
+
+
+}
+
+
+
+
+
+// ==========================================
+// 12. PROTECTION CONTRE LES ERREURS DE SAISIE
+// ==========================================
+
+
+document.addEventListener("input",(event)=>{
+
+
+    if(event.target.tagName === "INPUT"){
+
+
+        event.target.value =
+        event.target.value.replace(/[^0-9]/g,"");
+
+
+    }
+
+
+});
+const btnPage2 = document.getElementById("btn-page2");
+
+if (btnPage2) {
+    btnPage2.addEventListener("click", () => {
+        window.location.href = "page2.html";
+    });
+}
+
+
+
+const btnGeo = document.getElementById("btn-geo");
+
+if (btnGeo) {
+    btnGeo.addEventListener("click", () => {
+        window.location.href = "problem-geo.html";
+    });
+}

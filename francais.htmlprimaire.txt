@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Français - Zah ko ianatra</title>
+    
+    <link rel="stylesheet" href="francais.css">
+    
+</head>
+
+
+<body>
+    
+    
+    <header>
+        
+        <h1>📖 Français</h1>
+        
+        <p>
+            Mianatra, Mitadidy, Mampiatra
+        </p>
+        
+    </header>
+    
+    
+    
+    
+    <button onclick="ouvrirSection('lecon')">
+        📚 Leçons
+    </button>
+    
+    
+    <button onclick="ouvrirSection('exercice')">
+        📝 Exercices
+    </button>
+    
+    
+    
+    
+    
+    <section id="lecon">
+        
+        
+        <h2>
+            Tableaux des verbes
+        </h2>
+        
+        
+        <div id="table-verbes"></div>
+        
+        
+    </section>
+    
+    
+    
+    
+    
+    
+    
+    <section id="exercice" class="cache">
+        
+        
+        <h2>
+            Exercice de conjugaison
+        </h2>
+        
+        
+        <div class="question">
+            
+            
+            <p>
+                Verbe :
+                <b id="verbe"></b>
+            </p>
+            
+            
+            <p>
+                Temps :
+                <b id="temps"></b>
+            </p>
+            
+            
+            
+            <h3>
+                
+                <span id="pronom"></span>
+                
+                <input id="reponse">
+                
+            </h3>
+            
+            
+            
+            <button onclick="corriger()">
+                ✅ Valider
+            </button>
+            
+            
+        </div>
+        
+        
+        
+        
+        <div id="correction"></div>
+        
+        
+        <button onclick="nouvelExercice()">
+            ➡ Suivant
+        </button>
+        
+        
+        
+    </section>
+    
+    
+    <script type="module" src="protection.js"></script>
+    
+    
+    <script src="francais.js"></script>
+    <!-- Retour vers page2 -->
+
+<button 
+class="retour-btn"
+onclick="window.location.href='page2.html'">
+
+🏠 Retour Accueil
+
+</button>
+</body>
+
+</html>

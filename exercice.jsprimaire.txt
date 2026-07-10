@@ -1,0 +1,3536 @@
+/**
+ * ================================================================
+ * EXERCICE.JS PRO
+ * PARTIE 1/8
+ * Infrastructure + Navigation + Outils
+ * ================================================================
+ */
+
+
+// ================================================================
+// VARIABLES GLOBALES
+// ================================================================
+
+
+let currentSection = "";
+
+let currentExerciseData = {};
+
+
+
+
+
+// ================================================================
+// OUTILS GENERAUX
+// ================================================================
+
+
+function aleatoire(min, max){
+
+    return Math.floor(
+        Math.random() * (max - min + 1)
+    ) + min;
+
+}
+
+
+
+
+
+function formatNombre(nombre){
+
+    return Number(nombre)
+    .toLocaleString("fr-FR");
+
+}
+
+
+
+
+
+function element(id){
+
+    return document.getElementById(id);
+
+}
+
+
+
+
+
+
+// ================================================================
+// NAVIGATION
+// ================================================================
+
+
+
+function showSection(sectionId){
+
+
+    currentSection = sectionId;
+
+
+
+    element("main-menu")
+    ?.classList.add("hidden");
+
+
+
+    element("btn-back")
+    ?.classList.remove("hidden");
+
+
+
+    element("exercise-zone")
+    ?.classList.remove("hidden");
+
+
+
+
+
+    document
+    .querySelectorAll(".sec-content")
+    .forEach(section=>{
+
+        section.classList.add("hidden");
+
+    });
+
+
+
+
+
+    const section =
+    element(
+        "sec-" + sectionId
+    );
+
+
+
+    if(section){
+
+        section.classList.remove("hidden");
+
+        section.classList.add("animate-pop");
+
+    }
+
+
+
+
+
+    hideFeedback();
+
+
+
+
+
+    switch(sectionId){
+
+
+        case "operations":
+
+            generateOperation();
+
+        break;
+
+
+
+        case "preuve9":
+
+            element("p9-lesson")
+            ?.classList.remove("hidden");
+
+            element("p9-ex")
+            ?.classList.add("hidden");
+
+        break;
+
+
+
+        case "conversion":
+
+
+            element("conv-lesson")
+            ?.classList.remove("hidden");
+
+
+            element("conv-ex")
+            ?.classList.add("hidden");
+
+
+        break;
+
+
+
+        case "lettres":
+
+            generateLettres();
+
+        break;
+
+
+    }
+
+
+
+}
+
+
+
+
+
+
+
+
+
+function goBack(){
+
+
+
+    element("main-menu")
+    ?.classList.remove("hidden");
+
+
+
+    element("btn-back")
+    ?.classList.add("hidden");
+
+
+
+    element("exercise-zone")
+    ?.classList.add("hidden");
+
+
+
+    hideFeedback();
+
+
+}
+
+
+
+
+
+
+
+
+
+// ================================================================
+// GESTION FEEDBACK
+// ================================================================
+
+
+
+function hideFeedback(){
+
+
+[
+"feedback-box",
+"feedback-success",
+"feedback-error",
+"btn-next",
+"btn-retry"
+
+]
+.forEach(id=>{
+
+
+    element(id)
+    ?.classList.add("hidden");
+
+
+});
+
+
+}
+
+
+
+
+
+
+
+function showSuccess(){
+
+
+const box =
+element("feedback-box");
+
+
+
+if(!box)return;
+
+
+
+box.classList.remove("hidden");
+
+
+
+element("feedback-success")
+?.classList.remove("hidden");
+
+
+
+element("feedback-error")
+?.classList.add("hidden");
+
+
+
+element("btn-next")
+?.classList.remove("hidden");
+
+
+
+element("btn-retry")
+?.classList.add("hidden");
+
+
+}
+
+
+
+
+
+
+
+
+function showError(contenu, continuer=false){
+
+
+const box =
+element("feedback-box");
+
+
+
+if(!box)return;
+
+
+
+box.classList.remove("hidden");
+
+
+
+element("feedback-error")
+?.classList.remove("hidden");
+
+
+
+element("feedback-success")
+?.classList.add("hidden");
+
+
+
+
+
+element("teacher-explanation")
+.innerHTML = contenu;
+
+
+
+
+
+if(continuer){
+
+
+element("btn-next")
+?.classList.remove("hidden");
+
+
+element("btn-retry")
+?.classList.add("hidden");
+
+
+}
+
+else{
+
+
+element("btn-retry")
+?.classList.remove("hidden");
+
+
+element("btn-next")
+?.classList.add("hidden");
+
+
+}
+
+
+
+}
+
+
+
+
+
+
+
+
+
+// ================================================================
+// INITIALISATION
+// ================================================================
+
+
+
+document.addEventListener(
+"DOMContentLoaded",
+()=>{
+
+
+hideFeedback();
+
+
+console.log(
+"🎒 Moteur mathématique PRO chargé"
+);
+
+
+});
+
+
+
+
+/**
+ * ================================================================
+ * PARTIE 2/8
+ * OPERATIONS INTELLIGENTES
+ * ================================================================
+ */
+
+
+
+function generateOperation(){
+
+
+    hideFeedback();
+
+
+
+    const types = [
+        "+",
+        "-",
+        "×",
+        "÷"
+    ];
+
+
+
+    const op =
+    types[
+        aleatoire(0,types.length-1)
+    ];
+
+
+
+    let a,b,result;
+
+
+
+    switch(op){
+
+
+        case "+":
+
+            a = aleatoire(120,999);
+
+            b = aleatoire(20,299);
+
+            result = a+b;
+
+        break;
+
+
+
+
+        case "-":
+
+            a = aleatoire(200,999);
+
+            b = aleatoire(20,a-10);
+
+            result = a-b;
+
+        break;
+
+
+
+
+        case "×":
+
+            a = aleatoire(12,99);
+
+            b = aleatoire(2,9);
+
+            result = a*b;
+
+        break;
+
+
+
+
+        case "÷":
+
+            b = aleatoire(2,9);
+
+            result = aleatoire(5,50);
+
+            a = b*result;
+
+        break;
+
+
+    }
+
+
+
+
+
+
+    currentExerciseData = {
+
+
+        type:"operation",
+
+        a,
+
+        b,
+
+        op,
+
+        answer:result
+
+
+    };
+
+
+
+
+
+
+
+
+    element("op-question").innerHTML = `
+
+        Calcule :
+
+        <span class="badge-math">
+
+        ${a} ${op} ${b}
+
+        </span>
+
+    `;
+
+
+
+
+
+
+    element("op-input").value="";
+
+
+
+}
+
+
+
+
+
+
+
+
+
+function checkOperation(){
+
+
+
+    const valeur =
+
+    Number(
+        element("op-input").value
+    );
+
+
+
+    const data =
+    currentExerciseData;
+
+
+
+
+
+    if(valeur===data.answer){
+
+
+        showSuccess();
+
+        return;
+
+    }
+
+
+
+
+
+
+
+    let correction="";
+
+
+
+
+
+
+    switch(data.op){
+
+
+
+        case "+":
+
+
+            correction =
+            correctionAddition(data);
+
+
+        break;
+
+
+
+
+        case "-":
+
+
+            correction =
+            correctionSoustraction(data);
+
+
+        break;
+
+
+
+
+        case "×":
+
+
+            correction =
+            correctionMultiplication(data);
+
+
+        break;
+
+
+
+
+        case "÷":
+
+
+            correction =
+            correctionDivision(data);
+
+
+        break;
+
+
+
+    }
+
+
+
+
+
+
+    showError(
+        correction,
+        true
+    );
+
+
+
+}
+
+
+
+
+
+
+
+
+
+// ================================================================
+// CORRECTION ADDITION
+// ================================================================
+
+
+
+function correctionAddition(d){
+
+
+
+return `
+
+
+<div class="math-board-pro">
+
+
+<h3>
+➕ Correction de l'addition
+</h3>
+
+
+
+<table class="pro-column-table">
+
+
+<tr>
+
+<td></td>
+<td>${d.a}</td>
+
+</tr>
+
+
+<tr>
+
+<td>+</td>
+
+<td>${d.b}</td>
+
+</tr>
+
+
+
+<tr>
+
+<td colspan="2">
+
+────────
+
+</td>
+
+
+</tr>
+
+
+
+<tr>
+
+
+<td>=</td>
+
+
+<td class="text-green">
+
+${d.answer}
+
+</td>
+
+
+</tr>
+
+
+</table>
+
+
+
+
+<p>
+
+On additionne colonne par colonne :
+
+</p>
+
+
+<p>
+
+Unités → dizaines → centaines
+
+</p>
+
+
+<strong>
+
+${d.a} + ${d.b} = ${d.answer}
+
+</strong>
+
+
+
+</div>
+
+`;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+// ================================================================
+// CORRECTION SOUSTRACTION
+// ================================================================
+
+
+
+function correctionSoustraction(d){
+
+
+
+return `
+
+
+<div class="math-board-pro">
+
+
+<h3>
+➖ Correction de la soustraction
+</h3>
+
+
+
+
+<table class="pro-column-table">
+
+
+<tr>
+
+<td>
+
+${d.a}
+
+</td>
+
+
+</tr>
+
+
+
+<tr>
+
+<td>
+
+- ${d.b}
+
+</td>
+
+
+</tr>
+
+
+
+<tr>
+
+<td>
+
+────────
+
+</td>
+
+</tr>
+
+
+
+<tr>
+
+
+<td class="text-green">
+
+${d.answer}
+
+</td>
+
+
+</tr>
+
+
+
+</table>
+
+
+
+
+
+<p>
+
+On commence par les unités.
+
+Si le chiffre du haut est trop petit,
+on emprunte une dizaine.
+
+</p>
+
+
+
+<strong>
+
+${d.a} - ${d.b} = ${d.answer}
+
+</strong>
+
+
+
+</div>
+
+
+`;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+// ================================================================
+// CORRECTION MULTIPLICATION
+// ================================================================
+
+
+
+function correctionMultiplication(d){
+
+
+
+return `
+
+
+<div class="math-board-pro">
+
+
+<h3>
+✖️ Correction multiplication
+</h3>
+
+
+
+<p>
+
+On multiplie :
+
+</p>
+
+
+
+<h2>
+
+${d.a} × ${d.b}
+
+</h2>
+
+
+
+<p>
+
+Résultat :
+
+</p>
+
+
+
+<h2 class="text-green">
+
+${d.answer}
+
+</h2>
+
+
+
+<p>
+
+Vérification :
+
+</p>
+
+
+<strong>
+
+${d.answer} ÷ ${d.b} = ${d.a}
+
+</strong>
+
+
+
+</div>
+
+
+`;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+// ================================================================
+// CORRECTION DIVISION
+// ================================================================
+
+
+
+function correctionDivision(d){
+
+
+
+return `
+
+
+<div class="math-board-pro">
+
+
+<h3>
+➗ Correction division
+</h3>
+
+
+
+<p>
+
+On cherche combien de fois
+
+<strong>
+
+${d.b}
+
+</strong>
+
+rentre dans
+
+<strong>
+
+${d.a}
+
+</strong>
+
+</p>
+
+
+
+
+<p>
+
+${d.b} × ${d.answer}
+
+=
+
+${d.a}
+
+</p>
+
+
+
+
+<h2 class="text-green">
+
+${d.a} ÷ ${d.b} = ${d.answer}
+
+</h2>
+
+
+
+</div>
+
+
+`;
+
+
+
+}
+
+
+
+
+
+/* =====================================================
+   PREUVE PAR 9 (CORRIGÉ)
+===================================================== */
+
+function startPreuve9Ex(){
+    element("p9-lesson")?.classList.add("hidden");
+    element("p9-ex")?.classList.remove("hidden");
+    generatePreuve9();
+}
+
+function reduire9(nombre){
+    let somme = 0;
+    String(nombre).split("").forEach(ch => {
+        somme += Number(ch);
+    });
+
+    while(somme >= 10){
+        somme = String(somme).split("").reduce((a, b) => a + Number(b), 0);
+    }
+
+    return somme;
+}
+
+function generatePreuve9(){
+    hideFeedback();
+
+    let a = aleatoire(20, 999);
+    let b = aleatoire(2, 99);
+    let resultat = a * b;
+
+    // Calculs respectant la disposition standard de la croix
+    let haut = reduire9(a);
+    let bas = reduire9(b);
+    let gauche = reduire9(resultat);
+    let droite = reduire9(haut * bas);
+
+    currentExerciseData = {
+        type: "p9",
+        a,
+        b,
+        answer: resultat,
+        haut,
+        bas,
+        gauche,
+        droite,
+        calculHaut: String(a).split("").join(" + "),
+        calculBas: String(b).split("").join(" + "),
+        calculGauche: String(resultat).split("").join(" + ")
+    };
+
+    element("p9-question").innerHTML = `
+        Calcule :
+        <span class="badge-math">
+        ${a} × ${b}
+        </span>
+    `;
+
+    ["p9-prod-input", "p9-top", "p9-bottom", "p9-right", "p9-left"].forEach(id => {
+        element(id).value = "";
+    });
+}
+
+function checkPreuve9(){
+    let d = currentExerciseData;
+
+    let produit = Number(element("p9-prod-input").value);
+    let haut = Number(element("p9-top").value);
+    let bas = Number(element("p9-bottom").value);
+    let gauche = Number(element("p9-left").value);
+    let droite = Number(element("p9-right").value);
+
+    // Vérification stricte de tous les champs alignés
+    if(
+        produit === d.answer &&
+        haut === d.haut &&
+        bas === d.bas &&
+        gauche === d.gauche &&
+        droite === d.droite
+    ){
+        showSuccess();
+    } else {
+        showError(`
+        <div class="math-board-pro">
+            <h3>👨‍🏫 Correction guidée</h3>
+            <h2>${d.a} × ${d.b} = <span class="text-green">${d.answer}</span></h2>
+            <hr>
+            <h3>Preuve par 9 :</h3>
+
+            <div class="big-cross-demo">
+                <div class="cross-line"></div>
+
+                <!-- HAUT : Multiplicande a -->
+                <div class="cross-number top">
+                    ${d.haut}
+                    <small>${d.calculHaut} = ${d.haut}</small>
+                </div>
+
+                <!-- BAS : Multiplicateur b -->
+                <div class="cross-number bottom">
+                    ${d.bas}
+                    <small>${d.calculBas} = ${d.bas}</small>
+                </div>
+
+                <!-- GAUCHE : Résultat de la multiplication -->
+                <div class="cross-number left">
+                    ${d.gauche}
+                    <small>${d.calculGauche} = ${d.gauche}</small>
+                </div>
+
+                <!-- DROITE : Haut x Bas -->
+                <div class="cross-number right">
+                    ${d.droite}
+                    <small>${d.haut} × ${d.bas} = ${d.haut * d.bas}</small>
+                </div>
+            </div>
+
+            <p>
+                Vérification :<br><br>
+                Haut × Bas : ${d.haut} × ${d.bas} = ${d.haut * d.bas} → réduction : <strong>${d.droite}</strong>
+                <br><br>
+                Résultat : ${d.answer} → réduction : <strong>${d.gauche}</strong>
+                <br><br>
+                Le chiffre de gauche (<strong>${d.gauche}</strong>) et de droite (<strong>${d.droite}</strong>) doivent être identiques !
+            </p>
+        </div>
+        `, false);
+    }
+}
+
+/**
+ * ================================================================
+ * PARTIE 4/8
+ * CONVERSION INTELLIGENTE
+ * ================================================================
+ */
+
+
+
+const tableauxConversion = {
+
+
+    longueur : [
+        "km",
+        "hm",
+        "dam",
+        "m",
+        "dm",
+        "cm",
+        "mm"
+    ],
+
+
+
+    masse : [
+        "kg",
+        "hg",
+        "dag",
+        "g",
+        "dg",
+        "cg",
+        "mg"
+    ],
+
+
+
+    capacite : [
+        "kL",
+        "hL",
+        "daL",
+        "L",
+        "dL",
+        "cL",
+        "mL"
+    ]
+
+};
+
+
+
+
+
+
+
+
+function startConvEx(){
+
+
+    element("conv-lesson")
+    ?.classList.add("hidden");
+
+
+    element("conv-ex")
+    ?.classList.remove("hidden");
+
+
+
+    generateConversion();
+
+
+}
+
+
+
+
+
+
+
+
+
+function generateConversion(){
+
+    hideFeedback();
+
+
+    const categories = [
+        "longueur",
+        "masse",
+        "capacite"
+    ];
+
+
+    const type =
+    categories[
+        aleatoire(0, categories.length - 1)
+    ];
+
+
+    const unites =
+    tableauxConversion[type];
+
+
+
+    let depart =
+    aleatoire(0,6);
+
+
+    let arrivee =
+    aleatoire(0,6);
+
+
+
+    // éviter la même unité
+    while(arrivee === depart){
+
+        arrivee =
+        aleatoire(0,6);
+
+    }
+
+
+
+    const valeur =
+    aleatoire(1,99);
+
+
+
+    const difference =
+    arrivee - depart;
+
+
+
+    let resultat;
+
+
+
+    if(difference > 0){
+
+        // vers une unité plus petite
+        resultat =
+        valeur * Math.pow(10,difference);
+
+    }
+    else{
+
+        // vers une unité plus grande
+        resultat =
+        valeur / Math.pow(10,Math.abs(difference));
+
+    }
+
+
+
+    currentExerciseData = {
+
+        type:"conversion",
+
+        categorie:type,
+
+        valeur,
+
+        uniteDepart:
+        unites[depart],
+
+        uniteArrivee:
+        unites[arrivee],
+
+        depart,
+
+        arrivee,
+
+        rangs:
+        Math.abs(difference),
+
+        sens:
+        difference > 0 ? "multiplier" : "diviser",
+
+        unites,
+
+        answer:resultat
+
+    };
+
+
+
+
+    element("conv-question").innerHTML = `
+
+        Convertis :
+
+        <span class="badge-math">
+
+        ${valeur} ${unites[depart]}
+
+        </span>
+
+
+        en
+
+
+        <strong>
+
+        ${unites[arrivee]}
+
+        </strong>
+
+    `;
+
+
+
+    element("conv-unit").textContent =
+    unites[arrivee];
+
+
+
+    element("conv-input").value="";
+
+}
+
+
+
+
+
+
+function checkConversion(){
+
+
+
+    const reponse =
+
+    Number(
+        element("conv-input").value
+    );
+
+
+
+
+    const d =
+    currentExerciseData;
+
+
+
+
+
+
+    if(Math.abs(reponse - d.answer) < 0.001){
+
+
+        showSuccess();
+
+
+        return;
+
+
+    }
+
+
+
+
+
+
+
+
+    showError(
+
+        correctionConversion(d),
+
+        false
+
+    );
+
+
+
+}
+
+
+
+
+
+
+
+
+
+function correctionConversion(d){
+
+
+
+    let ligneUnites="";
+
+    let ligneValeurs="";
+
+
+
+
+
+    d.unites.forEach(
+    (u,index)=>{
+
+
+
+        let classe="";
+
+
+
+        if(index===d.depart)
+
+            classe="unit-start";
+
+
+
+        if(index===d.arrivee)
+
+            classe="unit-end";
+
+
+
+
+
+
+
+        ligneUnites += `
+
+
+        <td class="${classe}">
+
+        ${u}
+
+        </td>
+
+
+        `;
+
+
+
+
+
+
+        let valeur="";
+
+
+
+
+        if(index===d.depart){
+
+            valeur=d.valeur;
+
+        }
+
+
+
+        ligneValeurs += `
+
+
+        <td>
+
+        ${valeur}
+
+        </td>
+
+
+        `;
+
+
+
+    });
+
+
+
+
+
+
+
+
+
+    return `
+
+
+
+<div class="math-board-pro">
+
+
+<h3>
+⚖️ Correction conversion
+</h3>
+
+
+
+
+<table class="conversion-table">
+
+
+<tr>
+
+${ligneUnites}
+
+</tr>
+
+
+
+<tr>
+
+${ligneValeurs}
+
+</tr>
+
+
+
+</table>
+
+
+
+
+
+
+<p>
+
+
+On passe de
+
+<strong class="text-blue">
+
+${d.uniteDepart}
+
+</strong>
+
+
+vers
+
+
+<strong class="text-green">
+
+${d.uniteArrivee}
+
+</strong>
+
+
+
+</p>
+
+
+
+
+
+
+<p>
+
+
+Nombre de déplacements :
+
+</p>
+
+
+
+<h2 class="text-purple">
+
+${d.rangs}
+
+rang(s)
+
+</h2>
+
+
+
+
+
+
+
+<p>
+
+
+Chaque rang correspond à ×10 :
+
+</p>
+
+
+
+<strong>
+
+
+${d.valeur}
+
+×
+
+10
+
+×
+
+10
+
+${d.rangs} fois
+
+
+</strong>
+
+
+
+
+
+
+
+<h2 class="text-green">
+
+
+${d.valeur}
+
+${d.uniteDepart}
+
+=
+
+${d.answer}
+
+${d.uniteArrivee}
+
+
+</h2>
+
+
+
+
+
+</div>
+
+
+`;
+
+
+
+}
+
+
+
+
+/**
+ * ================================================================
+ * PARTIE 5/8
+ * CHIFFRES ET LETTRES INTELLIGENT
+ * ================================================================
+ */
+
+
+
+const nombresBase = {
+
+
+0:"zéro",
+
+1:"un",
+
+2:"deux",
+
+3:"trois",
+
+4:"quatre",
+
+5:"cinq",
+
+6:"six",
+
+7:"sept",
+
+8:"huit",
+
+9:"neuf",
+
+10:"dix",
+
+11:"onze",
+
+12:"douze",
+
+13:"treize",
+
+14:"quatorze",
+
+15:"quinze",
+
+16:"seize"
+
+
+};
+
+
+
+
+
+
+
+
+
+function nombreEnLettres(n){
+
+
+
+if(n<17){
+
+    return nombresBase[n];i
+
+}
+
+
+
+
+
+
+if(n<20){
+
+    return "dix-" + nombresBase[n-10];
+
+}
+
+
+
+
+
+
+
+const dizaines = {
+
+
+20:"vingt",
+
+30:"trente",
+
+40:"quarante",
+
+50:"cinquante",
+
+60:"soixante"
+
+
+};
+
+
+
+
+
+
+
+if(n<70){
+
+
+
+    let d =
+    Math.floor(n/10)*10;
+
+
+    let u =
+    n%10;
+
+
+
+    if(u===0)
+
+        return dizaines[d];
+
+
+
+    if(u===1)
+
+        return dizaines[d]+" et un";
+
+
+
+    return dizaines[d]+"-"+nombresBase[u];
+
+
+
+}
+
+
+
+
+
+
+
+
+if(n<80){
+
+
+
+    if(n===71)
+
+        return "soixante et onze";
+
+
+
+    return "soixante-"+nombreEnLettres(n-60);
+
+
+
+}
+
+
+
+
+
+
+
+
+
+if(n===80)
+
+    return "quatre-vingts";
+
+
+
+
+
+
+
+
+
+
+if(n<100){
+
+
+
+    if(n===81)
+
+        return "quatre-vingt-un";
+
+
+
+    return "quatre-vingt-"+nombreEnLettres(n-80);
+
+
+
+}
+
+
+
+
+
+
+
+
+
+if(n<1000){
+
+
+
+    let c =
+    Math.floor(n/100);
+
+
+
+    let reste =
+    n%100;
+
+
+
+
+
+    let texte="";
+
+
+
+
+
+    if(c===1)
+
+        texte="cent";
+
+    else
+
+        texte=nombresBase[c]+" cent";
+
+
+
+
+
+
+    if(reste===0 && c>1)
+
+        texte+="s";
+
+
+
+
+
+
+    if(reste>0)
+
+        texte+=" "+nombreEnLettres(reste);
+
+
+
+
+
+
+    return texte;
+
+
+
+}
+
+
+
+
+
+
+
+return String(n);
+
+
+
+}
+
+
+
+
+
+
+
+
+
+function lettresVersNombre(texte){
+
+
+
+    texte = texte
+
+    .toLowerCase()
+
+    .replace(/-/g," ")
+    
+    .trim();
+
+
+
+
+
+    for(let i=0;i<=999;i++){
+
+
+
+        if(
+            nombreEnLettres(i)
+            .replace(/-/g," ")
+            === texte
+        ){
+
+
+            return i;
+
+
+        }
+
+
+    }
+
+
+
+
+
+
+    return null;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+function generateLettres(){
+
+
+
+    hideFeedback();
+
+
+
+
+    const mode =
+
+    Math.random()>0.5
+
+    ?
+
+    "nombre"
+
+    :
+
+    "lettres";
+
+
+
+
+
+
+    const valeur =
+
+    aleatoire(1,999);
+
+
+
+
+
+
+
+    currentExerciseData = {
+
+
+        type:"lettres",
+
+
+        mode,
+
+
+        valeur,
+
+
+
+        answer:
+
+
+        mode==="nombre"
+
+        ?
+
+        nombreEnLettres(valeur)
+
+        :
+
+        valeur
+
+
+
+    };
+
+
+
+
+
+
+
+
+    if(mode==="nombre"){
+
+
+
+        element("lettres-question")
+        .innerHTML=
+
+        `
+
+
+
+        Écris en lettres :
+
+
+        <span class="badge-math">
+
+        ${valeur}
+
+        </span>
+
+
+        `;
+
+
+
+    }
+
+    else{
+
+
+
+        element("lettres-question")
+        .innerHTML=
+
+        `
+
+
+        Écris en chiffres :
+
+
+        <strong class="text-purple">
+
+        "${nombreEnLettres(valeur)}"
+
+        </strong>
+
+
+        `;
+
+
+
+    }
+
+
+
+
+
+
+
+    element("lettres-input")
+    .value="";
+
+
+
+}
+
+
+
+
+
+
+
+
+
+function checkLettres(){
+
+
+
+    let reponse =
+
+    element("lettres-input")
+    .value
+
+    .toLowerCase()
+
+    .replace(/-/g," ")
+
+    .trim();
+
+
+
+
+
+
+
+
+    let correct;
+
+
+
+
+
+    if(currentExerciseData.mode==="nombre"){
+
+
+
+        correct =
+
+        currentExerciseData.answer
+
+        .toLowerCase()
+
+        .replace(/-/g," ");
+
+
+
+    }
+
+    else{
+
+
+
+        correct =
+
+        String(
+            lettresVersNombre(reponse)
+        );
+
+
+
+    }
+
+
+
+
+
+
+
+
+    if(reponse===correct){
+
+
+
+        showSuccess();
+
+
+
+    }
+
+    else{
+
+
+
+        showError(`
+
+
+        <div class="math-board-pro">
+
+
+        <h3>
+        📝 Correction
+        </h3>
+
+
+        <p>
+        La bonne réponse est :
+        </p>
+
+
+
+        <h2 class="text-green">
+
+        ${currentExerciseData.answer}
+
+        </h2>
+
+
+        </div>
+
+
+        `,
+
+        false);
+
+
+
+    }
+
+
+
+}
+
+
+
+
+/**
+ * ================================================================
+ * PARTIE 6/8
+ * SCORE + PROGRESSION + EXPERIENCE UTILISATEUR
+ * ================================================================
+ */
+
+
+
+let scoreTotal = 
+Number(
+localStorage.getItem("scoreMath")
+) || 0;
+
+
+
+let exercicesReussis =
+
+Number(
+localStorage.getItem("reussitesMath")
+) || 0;
+
+
+
+let serieActuelle =
+
+Number(
+localStorage.getItem("serieMath")
+) || 0;
+
+
+
+
+
+
+
+
+
+function ajouterReussite(){
+
+
+
+    scoreTotal += 1;
+
+
+    exercicesReussis++;
+
+
+    serieActuelle++;
+
+
+
+
+    localStorage.setItem(
+        "scoreMath",
+        scoreTotal
+    );
+
+
+
+    localStorage.setItem(
+        "reussitesMath",
+        exercicesReussis
+    );
+
+
+
+    localStorage.setItem(
+        "serieMath",
+        serieActuelle
+    );
+
+
+
+}
+
+
+
+
+
+
+
+
+
+function resetSerie(){
+
+
+
+    serieActuelle=0;
+
+
+
+    localStorage.setItem(
+        "serieMath",
+        0
+    );
+
+
+}
+
+
+
+
+
+
+
+
+
+function messageBravo(){
+
+
+
+const messages=[
+
+
+"🌟 Excellent travail !",
+
+
+"👏 Bravo, continue comme ça !",
+
+
+"🚀 Tu progresses rapidement !",
+
+
+"🎯 Encore une réussite !",
+
+
+"🏆 Tu deviens un champion des maths !"
+
+
+];
+
+
+
+
+
+return messages[
+
+aleatoire(
+0,
+messages.length-1
+)
+
+];
+
+
+
+}
+
+
+
+
+
+
+
+
+
+// Modification de la réussite
+
+const ancienneFonctionSuccess =
+showSuccess;
+
+
+
+
+
+
+
+showSuccess = function(){
+
+
+
+    ajouterReussite();
+
+
+
+    ancienneFonctionSuccess();
+
+
+
+    const titre =
+
+    document.querySelector(
+        "#feedback-success h3"
+    );
+
+
+
+    if(titre){
+
+
+        titre.innerHTML =
+
+        messageBravo()
+        +
+        "<br>⭐ Score : "
+        +
+        scoreTotal;
+
+
+    }
+
+
+
+};
+
+
+
+
+
+
+
+
+
+// Quand l'élève se trompe
+
+const ancienShowError =
+showError;
+
+
+
+
+
+
+
+showError = function(contenu,continuer=false){
+
+
+
+    resetSerie();
+
+
+
+    ancienShowError(
+        contenu,
+        continuer
+    );
+
+
+};
+
+
+
+/**
+ * ================================================================
+ * PARTIE 7/8
+ * CORRECTIONS VISUELLES AVANCEES
+ * ================================================================
+ */
+
+
+
+
+
+function decomposerNombre(nombre){
+
+
+let texte =
+String(nombre);
+
+
+
+let longueur =
+texte.length;
+
+
+
+return {
+
+
+centaines:
+longueur>=3
+?
+texte[longueur-3]
+:
+"",
+
+
+
+dizaines:
+longueur>=2
+?
+texte[longueur-2]
+:
+"",
+
+
+
+unites:
+texte[longueur-1]
+
+
+};
+
+
+}
+
+
+
+
+
+
+
+
+
+function tableauNombre(nombre){
+
+
+
+let n =
+decomposerNombre(nombre);
+
+
+
+return `
+
+
+<table class="number-board">
+
+
+<tr>
+
+
+<th>
+Centaines
+</th>
+
+
+<th>
+Dizaines
+</th>
+
+
+<th>
+Unités
+</th>
+
+
+</tr>
+
+
+
+
+<tr>
+
+
+<td class="centaine">
+
+${n.centaines || 0}
+
+</td>
+
+
+
+<td class="dizaine">
+
+${n.dizaines || 0}
+
+</td>
+
+
+
+<td class="unite">
+
+${n.unites}
+
+</td>
+
+
+
+</tr>
+
+
+</table>
+
+
+`;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+function correctionAdditionPro(d){
+
+
+
+return `
+
+
+<div class="math-board-pro">
+
+
+<h3>
+👨‍🏫 Correction guidée addition
+</h3>
+
+
+
+${tableauNombre(d.a)}
+
+
+
+<p>
+
++</p>
+
+
+
+${tableauNombre(d.b)}
+
+
+
+
+
+<hr>
+
+
+
+
+<h2 class="text-green">
+
+${d.a+d.b}
+
+</h2>
+
+
+
+
+
+<p>
+
+
+On commence par les unités :
+
+<br>
+
+Puis les dizaines :
+
+<br>
+
+Puis les centaines.
+
+</p>
+
+
+
+
+
+<strong>
+
+${d.a} + ${d.b}
+
+=
+
+${d.answer}
+
+</strong>
+
+
+
+</div>
+
+
+
+`;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+function correctionSoustractionPro(d){
+
+
+
+return `
+
+
+<div class="math-board-pro">
+
+
+<h3>
+👨‍🏫 Correction guidée soustraction
+</h3>
+
+
+
+
+
+${tableauNombre(d.a)}
+
+
+
+
+
+<p>
+
+−
+
+</p>
+
+
+
+
+
+${tableauNombre(d.b)}
+
+
+
+
+
+
+<hr>
+
+
+
+
+
+<h2 class="text-green">
+
+${d.answer}
+
+</h2>
+
+
+
+
+
+
+
+<p>
+
+
+Si le chiffre du haut est plus petit :
+
+<br>
+
+➡️ on emprunte une dizaine.
+
+
+</p>
+
+
+
+
+
+<strong>
+
+${d.a}
+
+-
+
+${d.b}
+
+=
+
+${d.answer}
+
+</strong>
+
+
+
+</div>
+
+
+`;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+function tableauConversionPro(d){
+
+
+
+let html="";
+
+
+
+
+d.unites.forEach(
+(u,i)=>{
+
+
+
+let classe="";
+
+
+
+if(i===d.depart)
+
+classe="unit-start";
+
+
+
+if(i===d.arrivee)
+
+classe="unit-end";
+
+
+
+
+
+html+=`
+
+<td class="${classe}">
+
+${u}
+
+</td>
+
+`;
+
+
+
+});
+
+
+
+
+
+return `
+
+
+<table class="conversion-table">
+
+
+<tr>
+
+${html}
+
+</tr>
+
+
+</table>
+
+
+`;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+function correctionConversionPro(d){
+
+
+
+let sens =
+
+d.arrivee>d.depart
+
+?
+
+"➡️ On multiplie par 10"
+
+:
+
+"⬅️ On divise par 10";
+
+
+
+
+
+return `
+
+
+<div class="math-board-pro">
+
+
+<h3>
+👨‍🏫 Professeur conversion
+</h3>
+
+
+
+
+${tableauConversionPro(d)}
+
+
+
+
+
+
+<p>
+
+
+Déplacement :
+
+<strong>
+
+${Math.abs(
+d.arrivee-d.depart
+)}
+
+rang(s)
+
+</strong>
+
+
+</p>
+
+
+
+
+
+<h3 class="text-purple">
+
+
+${sens}
+
+</h3>
+
+
+
+
+
+<h2 class="text-green">
+
+
+${d.valeur}
+
+${d.uniteDepart}
+
+=
+
+${d.answer}
+
+${d.uniteArrivee}
+
+
+</h2>
+
+
+
+
+</div>
+
+
+`;
+
+
+
+}
+
+
+
+
+
+
+
+
+
+// Bouton exercice suivant
+
+function nextExercise(){
+
+
+hideFeedback();
+
+
+
+switch(currentSection){
+
+
+
+case "operations":
+
+generateOperation();
+
+break;
+
+
+
+case "preuve9":
+
+generatePreuve9();
+
+break;
+
+
+
+case "conversion":
+
+generateConversion();
+
+break;
+
+
+
+case "lettres":
+
+generateLettres();
+
+break;
+
+
+}
+
+
+
+}
+
+
+
+
+
+
+
+
+
+function retryExercise(){
+
+
+
+hideFeedback();
+
+
+
+nextExercise();
+
+
+}
+
+
+/**
+ * ================================================================
+ * PARTIE 8/8
+ * FINALISATION DU MOTEUR
+ * ================================================================
+ */
+
+
+
+
+
+function verifierInterface(){
+
+
+
+const elementsObligatoires=[
+
+
+"main-menu",
+
+"btn-back",
+
+"exercise-zone",
+
+
+"op-question",
+
+"op-input",
+
+
+"p9-question",
+
+"p9-prod-input",
+
+
+"conv-question",
+
+"conv-input",
+
+
+"lettres-question",
+
+"lettres-input",
+
+
+"feedback-box",
+
+"teacher-explanation"
+
+
+];
+
+
+
+
+
+
+elementsObligatoires.forEach(id=>{
+
+
+if(!element(id)){
+
+
+console.warn(
+"⚠️ Élément HTML absent :",
+id
+);
+
+
+}
+
+
+});
+
+
+
+}
+
+
+
+
+
+
+
+
+
+// ================================================================
+// VALIDATION AVEC ENTREE CLAVIER
+// ================================================================
+
+
+
+document.addEventListener(
+"keydown",
+(e)=>{
+
+
+
+if(e.key==="Enter"){
+
+
+
+switch(currentSection){
+
+
+
+case "operations":
+
+checkOperation();
+
+break;
+
+
+
+case "preuve9":
+
+checkPreuve9();
+
+break;
+
+
+
+case "conversion":
+
+checkConversion();
+
+break;
+
+
+
+case "lettres":
+
+checkLettres();
+
+break;
+
+
+
+}
+
+
+
+}
+
+
+
+});
+
+
+
+
+
+
+
+
+
+// ================================================================
+// PROTECTION DES ERREURS
+// ================================================================
+
+
+
+window.onerror=function(
+message,
+source,
+line
+){
+
+
+
+console.error(
+
+"Erreur moteur :",
+
+message,
+
+"Ligne :",
+
+line
+
+);
+
+
+
+};
+
+
+
+
+
+
+
+
+
+// ================================================================
+// DEMARRAGE APPLICATION
+// ================================================================
+
+
+
+document.addEventListener(
+"DOMContentLoaded",
+()=>{
+
+
+verifierInterface();
+
+
+
+console.log(
+`
+🎒 Application Mathématiques PRO
+
+Modules chargés :
+
+✔ Opérations
+✔ Preuve par 9
+✔ Conversion
+✔ Chiffres/Lettres
+✔ Score
+✔ Correction pédagogique
+
+`
+
+);
+
+
+
+});
+
+function normaliserTexteLettres(texte){
+
+    return texte
+    .toLowerCase()
+    .trim()
+
+    // supprimer les traits d'union
+    .replace(/-/g," ")
+
+    // supprimer les apostrophes
+    .replace(/'/g," ")
+
+    // supprimer les espaces multiples
+    .replace(/\s+/g," ");
+
+}
+
+
+
+
+
+
+
+function checkLettres(){
+
+
+    let saisie =
+
+    normaliserTexteLettres(
+        element("lettres-input").value
+    );
+
+
+
+
+    let correcte;
+
+
+
+    if(currentExerciseData.mode==="nombre"){
+
+
+        correcte =
+
+        normaliserTexteLettres(
+            currentExerciseData.answer
+        );
+
+
+    }
+
+    else{
+
+
+        correcte =
+
+        String(
+            currentExerciseData.valeur
+        );
+
+
+    }
+
+
+
+
+
+    if(saisie===correcte){
+
+
+        showSuccess();
+
+
+    }
+
+    else{
+
+
+        showError(`
+
+
+        <div class="math-board-pro">
+
+
+        <h3>
+        📝 Correction
+        </h3>
+
+
+        <p>
+        La bonne réponse est :
+        </p>
+
+
+        <h2 class="text-green">
+
+        ${
+        currentExerciseData.mode==="nombre"
+
+        ?
+
+        currentExerciseData.answer
+
+        :
+
+        currentExerciseData.valeur
+
+        }
+
+        </h2>
+
+
+        </div>
+
+
+        `,false);
+
+
+
+    }
+
+
+}

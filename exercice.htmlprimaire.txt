@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Espace Exercices Mathématiques</title>
+
+
+<link rel="stylesheet" href="exercice.css">
+
+
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
+
+
+</head>
+
+
+<body>
+
+
+<div class="app-container">
+
+
+
+<header class="app-header">
+
+<h1 class="animate-pop">
+🎒 Espace Exercices
+</h1>
+
+
+<p class="subtitle">
+Apprendre en s'amusant ! ✨
+</p>
+
+
+</header>
+
+
+
+
+
+<nav id="main-menu" class="menu-grid">
+
+
+<button class="menu-card card-blue"
+onclick="showSection('operations')">
+
+<span class="card-icon">🔢</span>
+
+<span class="card-title">
+Opérations
+</span>
+
+</button>
+
+
+
+
+<button class="menu-card card-orange"
+onclick="showSection('preuve9')">
+
+<span class="card-icon">✖️</span>
+
+<span class="card-title">
+Preuve par 9
+</span>
+
+</button>
+
+
+
+
+<button class="menu-card card-green"
+onclick="showSection('conversion')">
+
+<span class="card-icon">⚖️</span>
+
+<span class="card-title">
+Conversion
+</span>
+
+</button>
+
+
+
+
+<button class="menu-card card-purple"
+onclick="showSection('lettres')">
+
+<span class="card-icon">✍️</span>
+
+<span class="card-title">
+Chiffres & Lettres
+</span>
+
+</button>
+
+
+</nav>
+
+
+
+
+
+
+<button id="btn-back"
+class="btn btn-secondary hidden"
+onclick="goBack()">
+
+🏠 Menu Principal
+
+</button>
+
+
+<button 
+class="btn btn-secondary back-page"
+onclick="window.location.href='page2.html'">
+
+⬅️ Retour
+
+</button>
+
+
+
+
+
+
+
+<main id="exercise-zone" class="hidden">
+
+
+
+
+
+<div id="cahier-note"
+class="info-banner animate-slide">
+
+<span class="banner-icon">
+📝
+</span>
+
+
+<p class="banner-text">
+
+Mampiasa cahier ary ny valiny ihany no soratana eto !
+
+</p>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- OPERATIONS -->
+
+<section id="sec-operations"
+class="sec-content hidden">
+
+
+<div class="exercise-display">
+
+
+<div id="op-question"
+class="math-expression">
+
+</div>
+
+
+
+<div class="interactive-field">
+
+
+<input id="op-input"
+type="number"
+class="modern-input"
+placeholder="Réponse">
+
+
+<button class="btn btn-validate"
+onclick="checkOperation()">
+
+Vérifier
+
+</button>
+
+
+</div>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+<section id="sec-preuve9" class="sec-content hidden">
+
+    <!-- =========================
+         LEÇON (CORRIGÉE)
+    ========================== -->
+    <div id="p9-lesson" class="glass-panel">
+
+        <h3>📚 Comprendre la preuve par 9</h3>
+
+        <p>
+            La preuve par 9 permet de vérifier qu'une multiplication est correcte.
+            On réduit chaque nombre en additionnant ses chiffres jusqu'à obtenir un seul chiffre. zany oe ny preuve par 9 dia manaporofo fa marina ny multiplication iray. Jereo tsara ny exemple eto ambany
+        </p>
+
+        <div class="p9-example-board">
+
+            <h4>Exemple :</h4>
+
+            <h2>111 × 3 = 333</h2>
+
+            <div class="big-cross-demo">
+
+                <div class="cross-line"></div>
+
+                <!-- HAUT (Multiplicande) -->
+                <div class="cross-number top">
+                    3
+                    <small>1 + 1 + 1 = 3</small>
+                </div>
+
+                <!-- GAUCHE (Résultat de l'opération) -->
+                <div class="cross-number left">
+                    9
+                    <small>3 + 3 + 3 = 9</small>
+                </div>
+
+                <!-- DROITE (Haut x Bas) -->
+                <div class="cross-number right">
+                    9
+                    <small>3 × 3 = 9</small>
+                </div>
+
+                <!-- BAS (Multiplicateur) -->
+                <div class="cross-number bottom">
+                    3
+                    <small>3</small>
+                </div>
+
+            </div>
+
+            <p class="lesson-rule">
+                ⭐ La preuve est correcte lorsque le nombre obtenu à gauche
+                est identique(mitovy) au nombre obtenu à droite.
+            </p>
+
+            <button
+                class="btn btn-primary"
+                onclick="startPreuve9Ex()">
+                S'entraîner 💪
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         EXERCICE (CORRIGÉ)
+    ========================== -->
+    <div id="p9-ex" class="exercise-display hidden">
+
+        <!-- Sujet -->
+        <div id="p9-question" class="math-expression"></div>
+
+        <br>
+
+        <!-- Réponse -->
+        <label>✏️ Résultat de la multiplication :</label>
+        <input
+            type="number"
+            id="p9-prod-input"
+            class="modern-input"
+            placeholder="Écris le résultat">
+
+        <br><br>
+
+        <h3>Complète maintenant la preuve par 9</h3>
+
+        <div class="big-cross-exercise">
+
+            <div class="cross-line"></div>
+
+            <!-- HAUT -->
+            <input
+                type="number"
+                id="p9-top"
+                class="cross-input top"
+                placeholder="?">
+
+            <!-- GAUCHE -->
+            <input
+                type="number"
+                id="p9-left"
+                class="cross-input left"
+                placeholder="?">
+
+            <!-- DROITE -->
+            <input
+                type="number"
+                id="p9-right"
+                class="cross-input right"
+                placeholder="?">
+
+            <!-- BAS -->
+            <input
+                type="number"
+                id="p9-bottom"
+                class="cross-input bottom"
+                placeholder="?">
+
+        </div>
+
+        <button
+            class="btn btn-validate"
+            onclick="checkPreuve9()">
+            Vérifier
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- CONVERSION -->
+
+<section id="sec-conversion" class="sec-content hidden">
+
+
+    <!-- LEÇON -->
+
+    <div id="conv-lesson" class="glass-panel">
+
+        <h3>⚖️ Comprendre les conversions</h3>
+
+        <p>
+            Pour convertir une unité, on compte le nombre de rangs déplacés.
+            Chaque déplacement correspond à ×10 ou ÷10.
+        </p>
+
+
+        <button
+        class="btn btn-primary"
+        onclick="startConvEx()">
+
+        S'entraîner 💪
+
+        </button>
+
+    </div>
+
+
+
+
+
+    <!-- EXERCICE -->
+
+    <div id="conv-ex" class="exercise-display hidden">
+
+
+        <div id="conv-question"
+        class="math-expression">
+
+        </div>
+
+
+
+
+        <label>
+        Réponse :
+        </label>
+
+
+        <input
+        id="conv-input"
+        type="number"
+        class="modern-input"
+        placeholder="Écris la conversion">
+
+
+
+
+
+        <p>
+
+        Unité demandée :
+
+        <strong id="conv-unit"></strong>
+
+        </p>
+
+
+
+
+
+        <button
+        class="btn btn-validate"
+        onclick="checkConversion()">
+
+        Vérifier
+
+        </button>
+
+
+    </div>
+
+
+</section>
+<!-- LETTRES -->
+
+
+<section id="sec-lettres"
+class="sec-content hidden">
+
+
+
+<div class="exercise-display">
+
+
+
+<div id="lettres-question"
+class="math-expression">
+
+</div>
+
+
+
+
+
+<input id="lettres-input"
+class="modern-input large-text"
+type="text"
+placeholder="Réponse">
+
+
+
+
+
+<button class="btn btn-validate"
+onclick="checkLettres()">
+
+Vérifier
+
+</button>
+
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- FEEDBACK -->
+
+
+<div id="feedback-box"
+class="feedback-panel hidden">
+
+
+<div id="feedback-success"
+class="panel-success hidden">
+
+
+<div class="success-animation">
+⭐
+</div>
+
+
+<h3>
+
+Bravo ! Réponse correcte 🎉
+
+</h3>
+
+
+</div>
+
+
+
+
+
+<div id="feedback-error"
+class="panel-error hidden">
+
+
+<div class="board-header">
+
+👨‍🏫 Correction
+
+</div>
+
+
+
+<div id="teacher-explanation"
+class="board-body">
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+<div class="action-bar">
+
+
+<button id="btn-next"
+class="btn btn-next hidden"
+onclick="nextExercise()">
+
+Continuer ➡️
+
+</button>
+
+
+
+
+<button id="btn-retry"
+class="btn btn-retry hidden"
+onclick="retryExercise()">
+
+Recommencer 🔄
+
+</button>
+
+
+
+</div>
+
+
+
+</div>
+
+
+
+
+
+
+</main>
+
+
+
+</div>
+
+
+
+
+
+
+<script src="exercice.js" defer></script>
+
+<script type="module" src="protection.js"></script>
+
+</body>
+
+</html>

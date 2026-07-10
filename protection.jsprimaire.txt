@@ -1,0 +1,222 @@
+import { db } from "./firebase-config.js";
+
+import {
+    ref,
+    get
+} from "https://www.gstatic.com/firebasejs/10.12.5/firebase-database.js";
+
+
+
+async function verifierAcces() {
+    
+    
+    const userLocal =
+        JSON.parse(
+            localStorage.getItem("user")
+        );
+    
+    
+    
+    // Pas connecté
+    
+    if (!userLocal) {
+        
+        window.location.href = "index.html";
+        
+        return;
+        
+    }
+    // =======================
+// VERIFICATION LOCALE OFFLINE
+// =======================
+
+const dateFinLocale =
+    new Date(userLocal.dateFin);
+
+
+const aujourdHui =
+    new Date();
+
+
+if(
+    !isNaN(dateFinLocale.getTime())
+    &&
+    aujourdHui > dateFinLocale
+){
+
+    alert(
+    "Votre période d'accès est terminée. Veuillez renouveler votre abonnement."
+    );
+
+
+    localStorage.removeItem("user");
+
+
+    window.location.href =
+    "index.html";
+
+
+    return;
+
+}
+    
+    
+    
+    try {
+        
+        
+        const snapshot =
+            await get(
+                ref(db, "users")
+            );
+        
+        
+        
+        let utilisateur = null;
+        
+        
+        
+        snapshot.forEach((child) => {
+            
+            
+            const user = child.val();
+            
+            
+            
+            if (
+                user.phone === userLocal.phone
+            ) {
+                
+                utilisateur = user;
+                
+            }
+            
+            
+        });
+        
+        
+        
+        
+        
+        // Utilisateur introuvable
+        
+        if (!utilisateur) {
+            
+            
+            localStorage.removeItem("user");
+            
+            
+            window.location.href =
+                "index.html";
+            
+            
+            return;
+            
+        }
+        
+        
+        
+        
+        
+        // Vérification date
+        
+        const dateFin =
+            new Date(
+                utilisateur.dateFin
+            );
+        
+        
+        
+        if (
+            isNaN(
+                dateFin.getTime()
+            )
+        ) {
+            
+            console.log(
+                "Date fin invalide"
+            );
+            
+            return;
+            
+        }
+        
+        
+        
+        
+        
+        const aujourdHui =
+            new Date();
+        
+        
+        
+        
+        
+        // Accès expiré
+        
+        if (
+            aujourdHui > dateFin
+        ) {
+            
+            
+            alert(
+                "Votre période d'accès est terminée. Veuillez renouveler votre abonnement."
+            );
+            
+            
+            
+            localStorage.removeItem(
+                "user"
+            );
+            
+            
+            
+            window.location.href =
+                "index.html";
+            
+            
+            return;
+            
+        }
+        
+        
+        
+        
+        
+        // Mettre à jour la session locale
+        
+        localStorage.setItem(
+            "user",
+            JSON.stringify(utilisateur)
+        );
+        
+        
+        
+        
+        console.log(
+            "Accès autorisé"
+        );
+        
+        
+        
+    }
+    
+    
+    catch (error) {
+        
+        
+        console.log(
+            "Erreur vérification : ",
+            error
+        );
+        
+        
+    }
+    
+    
+    
+}
+
+
+
+verifierAcces();

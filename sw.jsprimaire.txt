@@ -1,0 +1,139 @@
+const CACHE_NAME = "zah-ianatra-v1";
+
+
+
+const fichiers = [
+  
+  
+  "/",
+  
+  "index.html",
+  
+  "page2.html",
+  
+  "operation.html",
+  
+  "problem.html",
+  
+  "exercice.html",
+  
+  "francais.html",
+  
+  "problem-geo.html",
+  
+  
+  
+  "style.css",
+  
+  "page2.css",
+  
+  "exercice.css",
+  
+  "operation.css",
+  
+  "problem.css",
+  
+  "francais.css",
+  
+  "geo.css",
+  
+  
+  
+  "app.js",
+  
+  "exercice.js",
+  
+  "firebase-config.js",
+  
+  "operation.js",
+  
+  "page2.js",
+  
+  "problem.js",
+  
+  "protection.js",
+  
+  "francais.js",
+  
+  "geo.js",
+  
+  "manifest.json",
+  "icon-192.png",
+  "icon-512.png"
+  
+  
+  
+];
+
+
+
+
+
+
+
+// INSTALLATION
+
+self.addEventListener(
+  "install",
+  
+  event => {
+    
+    
+    event.waitUntil(
+      
+      
+      caches.open(CACHE_NAME)
+      
+      .then(cache => {
+        
+        
+        return cache.addAll(fichiers);
+        
+        
+      })
+      
+      
+    );
+    
+    
+  }
+  
+);
+
+
+
+
+
+
+
+
+
+// OUVERTURE DES PAGES
+
+self.addEventListener(
+  
+  "fetch",
+  
+  event => {
+    
+    
+    event.respondWith(
+      
+      
+      caches.match(event.request)
+      
+      .then(response => {
+        
+        
+        return response || fetch(event.request);
+        
+        
+      })
+      
+      
+    );
+    
+    
+  }
+  
+);

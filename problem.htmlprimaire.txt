@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Problèmes Mathématiques</title>
+
+    <link rel="stylesheet" href="problem.css">
+</head>
+<body>
+
+<div class="app-container">
+
+    <!-- ================= MENU ================= -->
+
+    <section id="selection-screen" class="screen">
+
+        <h1 class="main-title">
+            🎯 Entraîne-toi avec les problèmes
+        </h1>
+
+        <p class="subtitle">
+            Choisis un type de problème puis réponds aux questions.
+        </p>
+
+        <div class="menu-buttons">
+
+            <button id="btn-simple" class="btn-menu">
+                🍎 Problèmes classiques
+            </button>
+
+           <button
+    id="btn-geo"
+    class="btn-menu btn-geo">
+
+    📐 Problèmes géométriques
+
+</button>
+
+        </div>
+        <div class="back-home">
+    <button id="btn-page2" class="btn-secondary">
+        ⬅ Retour à l'accueil
+    </button>
+</div>
+
+    </section>
+
+
+    <!-- ================= JEU ================= -->
+
+    <section id="game-screen" class="screen hidden">
+
+        <header class="game-header">
+
+            <button id="btn-back" class="btn-secondary">
+                ⬅ Retour
+            </button>
+
+            <div class="badge">
+                Exercices de mathématiques
+            </div>
+
+        </header>
+
+
+        <main class="game-content">
+
+            <!-- Enoncé -->
+
+            <section class="enonce-box">
+
+                <h2>
+                    📝 Énoncé
+                </h2>
+
+                <p id="enonce-text">
+                    Chargement...
+                </p>
+
+            </section>
+
+
+            <!-- Consigne -->
+
+            <div class="cahier-notice">
+
+                ✍️ <strong>Conseil :</strong><br>
+
+                ataovy ao anaty cahier aloha ny opération ary ny valiny ihany no soratana eto ( tsy asina unité, ohatra oe: m, ar, sns)
+           
+            </div>
+
+
+            <!-- Réponses -->
+
+            <section class="answer-box">
+
+                <div
+                    id="answers-container"
+                    class="vertical-table">
+
+                    <!-- Généré automatiquement -->
+
+                </div>
+
+
+                <div class="action-box">
+
+                    <button
+                        id="btn-submit"
+                        class="btn-primary">
+
+                        ✅ Vérifier mes réponses
+
+                    </button>
+
+                    <button
+                        id="btn-next"
+                        class="btn-next hidden">
+
+                        ➜ Sujet suivant
+
+                    </button>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </section>
+
+</div>
+
+
+<!-- ================= MODALE ================= -->
+
+<div id="custom-modal" class="modal hidden">
+
+    <div class="modal-content">
+
+        <div id="modal-icon"></div>
+
+        <h2 id="modal-title"></h2>
+
+        <div id="modal-message"></div>
+
+        <button
+            id="modal-close"
+            class="btn-primary">
+
+            J'ai compris
+
+        </button>
+
+    </div>
+
+</div>
+
+<script src="problem.js"></script>
+<script type="module" src="protection.js"></script>
+</body>
+</html>

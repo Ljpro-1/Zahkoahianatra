@@ -1,0 +1,1319 @@
+// ==========================================
+// ZAH KO IANATRA
+// MODULE FRANÇAIS
+// PARTIE 1/3
+// TABLEAUX DES VERBES
+// ==========================================
+
+
+
+let exerciceActuel = null;
+
+
+
+
+
+// ==========================================
+// PRONOMS
+// ==========================================
+
+
+const pronoms = [
+  "Je",
+  "Tu",
+  "Il",
+  "Elle",
+  "Nous",
+  "Vous",
+  "Ils",
+  "Elles"
+];
+
+
+
+
+
+// ==========================================
+// VERBES
+// ==========================================
+
+
+const verbes = {
+  
+  
+  "être": {
+    
+    groupe: "irrégulier",
+    
+    present: [
+      "suis",
+      "es",
+      "est",
+      "est",
+      "sommes",
+      "êtes",
+      "sont",
+      "sont"
+    ],
+    
+    futur: [
+      "serai",
+      "seras",
+      "sera",
+      "sera",
+      "serons",
+      "serez",
+      "seront",
+      "seront"
+    ],
+    
+    passe: [
+      "fus",
+      "fus",
+      "fut",
+      "fut",
+      "fûmes",
+      "fûtes",
+      "furent",
+      "furent"
+    ],
+    
+    compose: [
+      "ai été",
+      "as été",
+      "a été",
+      "a été",
+      "avons été",
+      "avez été",
+      "ont été",
+      "ont été"
+    ]
+    
+  },
+  
+  
+  
+  
+  
+  
+  
+  "avoir": {
+    
+    groupe: "irrégulier",
+    
+    present: [
+      "ai",
+      "as",
+      "a",
+      "a",
+      "avons",
+      "avez",
+      "ont",
+      "ont"
+    ],
+    
+    futur: [
+      "aurai",
+      "auras",
+      "aura",
+      "aura",
+      "aurons",
+      "aurez",
+      "auront",
+      "auront"
+    ],
+    
+    passe: [
+      "eus",
+      "eus",
+      "eut",
+      "eut",
+      "eûmes",
+      "eûtes",
+      "eurent",
+      "eurent"
+    ],
+    
+    compose: [
+      "ai eu",
+      "as eu",
+      "a eu",
+      "a eu",
+      "avons eu",
+      "avez eu",
+      "ont eu",
+      "ont eu"
+    ]
+    
+  },
+  
+  
+  
+  
+  
+  
+  
+  // ==========================
+  // 1er GROUPE
+  // ==========================
+  
+  
+  "aimer": {
+    
+    present: ["aime", "aimes", "aime", "aime", "aimons", "aimez", "aiment", "aiment"],
+    
+    futur: ["aimerai", "aimeras", "aimera", "aimera", "aimerons", "aimerez", "aimeront", "aimeront"],
+    
+    passe: ["aimai", "aimas", "aima", "aima", "aimâmes", "aimâtes", "aimèrent", "aimèrent"],
+    
+    compose: ["ai aimé", "as aimé", "a aimé", "a aimé", "avons aimé", "avez aimé", "ont aimé", "ont aimé"]
+    
+  },
+  
+  
+  "parler": {
+    
+    present: ["parle", "parles", "parle", "parle", "parlons", "parlez", "parlent", "parlent"],
+    
+    futur: ["parlerai", "parleras", "parlera", "parlera", "parlerons", "parlerez", "parleront", "parleront"],
+    
+    passe: ["parlai", "parlas", "parla", "parla", "parlâmes", "parlâtes", "parlèrent", "parlèrent"],
+    
+    compose: ["ai parlé", "as parlé", "a parlé", "a parlé", "avons parlé", "avez parlé", "ont parlé", "ont parlé"]
+    
+  },
+  
+  
+  
+  "jouer": {
+    
+    present: ["joue", "joues", "joue", "joue", "jouons", "jouez", "jouent", "jouent"],
+    
+    futur: ["jouerai", "joueras", "jouera", "jouera", "jouerons", "jouerez", "joueront", "joueront"],
+    
+    passe: ["jouai", "jouas", "joua", "joua", "jouâmes", "jouâtes", "jouèrent", "jouèrent"],
+    
+    compose: ["ai joué", "as joué", "a joué", "a joué", "avons joué", "avez joué", "ont joué", "ont joué"]
+    
+  },
+  
+  
+  
+  
+  
+  
+  
+  // ==========================
+  // 2ème GROUPE
+  // ==========================
+  
+  
+  "finir": {
+    
+    present: ["finis", "finis", "finit", "finit", "finissons", "finissez", "finissent", "finissent"],
+    
+    futur: ["finirai", "finiras", "finira", "finira", "finirons", "finirez", "finiront", "finiront"],
+    
+    passe: ["finis", "finis", "finit", "finit", "finîmes", "finîtes", "finirent", "finirent"],
+    
+    compose: ["ai fini", "as fini", "a fini", "a fini", "avons fini", "avez fini", "ont fini", "ont fini"]
+    
+  },
+  
+  
+  
+  
+  
+  
+  
+  "choisir": {
+    
+    present: ["choisis", "choisis", "choisit", "choisit", "choisissons", "choisissez", "choisissent", "choisissent"],
+    
+    futur: ["choisirai", "choisiras", "choisira", "choisira", "choisirons", "choisirez", "choisiront", "choisiront"],
+    
+    passe: ["choisis", "choisis", "choisit", "choisit", "choisîmes", "choisîtes", "choisirent", "choisirent"],
+    
+    compose: ["ai choisi", "as choisi", "a choisi", "a choisi", "avons choisi", "avez choisi", "ont choisi", "ont choisi"]
+    
+  },
+  
+  
+  
+  
+  
+  
+  
+  // ==========================
+  // 3ème GROUPE
+  // ==========================
+  
+  
+  "aller": {
+    
+    present: ["vais", "vas", "va", "va", "allons", "allez", "vont", "vont"],
+    
+    futur: ["irai", "iras", "ira", "ira", "irons", "irez", "iront", "iront"],
+    
+    passe: ["allai", "allas", "alla", "alla", "allâmes", "allâtes", "allèrent", "allèrent"],
+    
+    compose: ["suis allé", "es allé", "est allé", "est allée", "sommes allés", "êtes allés", "sont allés", "sont allées"]
+    
+  },
+  
+  
+  
+  "faire": {
+    
+    present: ["fais", "fais", "fait", "fait", "faisons", "faites", "font", "font"],
+    
+    futur: ["ferai", "feras", "fera", "fera", "ferons", "ferez", "feront", "feront"],
+    
+    passe: ["fis", "fis", "fit", "fit", "fîmes", "fîtes", "firent", "firent"],
+    
+    compose: ["ai fait", "as fait", "a fait", "a fait", "avons fait", "avez fait", "ont fait", "ont fait"]
+    
+  },
+  
+  
+  
+  "prendre": {
+    
+    present: ["prends", "prends", "prend", "prend", "prenons", "prenez", "prennent", "prennent"],
+    
+    futur: ["prendrai", "prendras", "prendra", "prendra", "prendrons", "prendrez", "prendront", "prendront"],
+    
+    passe: ["pris", "pris", "prit", "prit", "prîmes", "prîtes", "prirent", "prirent"],
+    
+    compose: ["ai pris", "as pris", "a pris", "a pris", "avons pris", "avez pris", "ont pris", "ont pris"]
+    
+  }
+  
+};
+
+
+
+// FIN PARTIE 1
+
+
+// ==========================================
+// PARTIE 2/3
+// TABLEAUX + GENERATEUR EXERCICE
+// ==========================================
+
+
+
+
+// ==========================================
+// AJOUT DES VERBES RESTANTS
+// ==========================================
+
+
+// Fonction pour créer automatiquement les verbes réguliers
+
+
+function creerVerbeRegulier(nom){
+
+
+let radical = nom.slice(0,-2);
+
+
+
+return {
+
+
+present:[
+
+radical+"e",
+radical+"es",
+radical+"e",
+radical+"e",
+radical+"ons",
+radical+"ez",
+radical+"ent",
+radical+"ent"
+
+],
+
+
+futur:[
+
+nom+"ai",
+nom+"as",
+nom+"a",
+nom+"a",
+nom+"ons",
+nom+"ez",
+nom+"ont",
+nom+"ont"
+
+],
+
+
+passe:[
+
+radical+"ai",
+radical+"as",
+radical+"a",
+radical+"a",
+radical+"âmes",
+radical+"âtes",
+radical+"èrent",
+radical+"èrent"
+
+],
+
+
+compose:[
+
+"ai "+radical+"é",
+"as "+radical+"é",
+"a "+radical+"é",
+"a "+radical+"é",
+"avons "+radical+"é",
+"avez "+radical+"é",
+"ont "+radical+"é",
+"ont "+radical+"é"
+
+]
+
+
+};
+
+
+}
+
+
+
+
+
+
+
+
+// ==========================================
+// VERBES 1er GROUPE
+// ==========================================
+
+
+[
+"chanter",
+"travailler",
+"regarder",
+"écouter",
+"demander",
+"chercher",
+"marcher",
+"danser",
+"dessiner",
+"habiter",
+"laver",
+"porter",
+"montrer",
+"garder"
+
+].forEach(v=>{
+
+
+verbes[v]=creerVerbeRegulier(v);
+
+
+});
+
+
+
+
+
+
+
+
+
+// ==========================================
+// VERBES 2ème GROUPE
+// ==========================================
+
+
+function creerVerbeIR(nom){
+
+
+let radical = nom.slice(0,-2);
+
+
+
+return {
+
+
+present:[
+
+radical+"is",
+radical+"is",
+radical+"it",
+radical+"it",
+radical+"issons",
+radical+"issez",
+radical+"issent",
+radical+"issent"
+
+],
+
+
+
+futur:[
+
+nom+"ai",
+nom+"as",
+nom+"a",
+nom+"a",
+nom+"ons",
+nom+"ez",
+nom+"ont",
+nom+"ont"
+
+],
+
+
+
+passe:[
+
+radical+"is",
+radical+"is",
+radical+"it",
+radical+"it",
+radical+"îmes",
+radical+"îtes",
+radical+"irent",
+radical+"irent"
+
+],
+
+
+
+compose:[
+
+"ai "+radical+"i",
+"as "+radical+"i",
+"a "+radical+"i",
+"a "+radical+"i",
+"avons "+radical+"i",
+"avez "+radical+"i",
+"ont "+radical+"i",
+"ont "+radical+"i"
+
+]
+
+
+};
+
+
+}
+
+
+
+[
+
+"grandir",
+"réussir",
+"remplir",
+"obéir",
+"punir",
+"réfléchir"
+
+].forEach(v=>{
+
+
+verbes[v]=creerVerbeIR(v);
+
+
+});
+
+
+
+
+
+
+
+
+
+// ==========================================
+// QUELQUES VERBES IRREGULIERS
+// ==========================================
+
+
+verbes["boire"]={
+
+present:[
+"bois",
+"bois",
+"boit",
+"boit",
+"buvons",
+"buvez",
+"boivent",
+"boivent"
+],
+
+
+futur:[
+"boirai",
+"boiras",
+"boira",
+"boira",
+"boirons",
+"boirez",
+"boiront",
+"boiront"
+],
+
+
+passe:[
+"bus",
+"bus",
+"but",
+"but",
+"bûmes",
+"bûtes",
+"burent",
+"burent"
+],
+
+
+compose:[
+"ai bu",
+"as bu",
+"a bu",
+"a bu",
+"avons bu",
+"avez bu",
+"ont bu",
+"ont bu"
+]
+
+};
+
+
+
+
+
+verbes["lire"]={
+
+present:[
+"lis",
+"lis",
+"lit",
+"lit",
+"lisons",
+"lisez",
+"lisent",
+"lisent"
+],
+
+
+futur:[
+"lirai",
+"liras",
+"lira",
+"lira",
+"lirons",
+"lirez",
+"liront",
+"liront"
+],
+
+
+passe:[
+"lus",
+"lus",
+"lut",
+"lut",
+"lûmes",
+"lûtes",
+"lurent",
+"lurent"
+],
+
+
+compose:[
+"ai lu",
+"as lu",
+"a lu",
+"a lu",
+"avons lu",
+"avez lu",
+"ont lu",
+"ont lu"
+]
+
+};
+
+
+
+
+
+
+
+
+// ==========================================
+// AFFICHAGE DES TABLEAUX
+// ==========================================
+
+
+function afficherTableaux(){
+
+
+
+let zone=document.getElementById(
+"table-verbes"
+);
+
+
+
+if(!zone)return;
+
+
+
+
+zone.innerHTML="";
+
+
+
+for(let verbe in verbes){
+
+
+
+let html=`
+
+
+<div class="table-card">
+
+
+<h3>
+${verbe}
+</h3>
+
+
+
+<table>
+
+
+<tr>
+<th>Pronom</th>
+<th>Présent</th>
+<th>Futur</th>
+<th>Passé</th>
+<th>Passé composé</th>
+</tr>
+
+
+`;
+
+
+
+
+
+for(let i=0;i<8;i++){
+
+
+html+=`
+
+<tr>
+
+<td>
+${pronoms[i]}
+</td>
+
+<td>
+${verbes[verbe].present[i]}
+</td>
+
+<td>
+${verbes[verbe].futur[i]}
+</td>
+
+<td>
+${verbes[verbe].passe[i]}
+</td>
+
+<td>
+${verbes[verbe].compose[i]}
+</td>
+
+
+</tr>
+
+`;
+
+}
+
+
+
+html+=`
+
+</table>
+
+</div>
+
+`;
+
+
+
+zone.innerHTML+=html;
+
+
+
+}
+
+
+
+}
+
+
+
+
+
+
+
+
+
+// ==========================================
+// GENERATEUR EXERCICE
+// ==========================================
+
+
+function genererExercice(){
+
+
+
+let listeVerbes = Object.keys(verbes);
+
+
+
+let verbe =
+
+listeVerbes[
+
+Math.floor(
+Math.random()*listeVerbes.length
+)
+
+];
+
+
+
+let temps =
+
+[
+
+"present",
+"futur",
+"passe",
+"compose"
+
+][
+
+Math.floor(
+Math.random()*4
+)
+
+];
+
+
+
+let index =
+
+Math.floor(
+Math.random()*8
+);
+
+
+
+return {
+
+
+verbe:verbe,
+
+
+temps:temps,
+
+
+tempsTexte:
+
+temps==="present"
+?
+"Présent"
+
+:
+
+temps==="futur"
+?
+"Futur"
+
+:
+
+temps==="passe"
+?
+"Passé simple"
+
+:
+
+"Passé composé",
+
+
+
+pronom:pronoms[index],
+
+
+
+reponse:
+
+verbes[verbe][temps][index]
+
+};
+
+
+}
+
+
+
+// FIN PARTIE 2
+
+
+
+// ==========================================
+// PARTIE 3/3
+// EXERCICE + CORRECTION + INITIALISATION
+// ==========================================
+
+
+
+
+
+// ==========================================
+// CHANGER DE PAGE
+// ==========================================
+
+
+function ouvrirSection(id){
+
+
+document
+.querySelectorAll("section")
+.forEach(s=>{
+
+s.classList.add("cache");
+
+});
+
+
+
+let page=document.getElementById(id);
+
+
+if(page){
+
+page.classList.remove("cache");
+
+}
+
+
+}
+
+
+
+
+
+
+
+
+
+// ==========================================
+// NOUVEL EXERCICE
+// ==========================================
+
+
+function nouvelExercice(){
+
+
+
+exerciceActuel = genererExercice();
+
+
+
+
+let verbe=document.getElementById(
+"verbe"
+);
+
+
+let temps=document.getElementById(
+"temps"
+);
+
+
+let pronom=document.getElementById(
+"pronom"
+);
+
+
+let input=document.getElementById(
+"reponse"
+);
+
+
+let correction=document.getElementById(
+"correction"
+);
+
+
+
+
+
+
+if(verbe)
+
+verbe.textContent=
+exerciceActuel.verbe;
+
+
+
+if(temps)
+
+temps.textContent=
+exerciceActuel.tempsTexte;
+
+
+
+if(pronom)
+
+pronom.textContent=
+exerciceActuel.pronom+" ______";
+
+
+
+
+if(input)
+
+input.value="";
+
+
+
+
+if(correction){
+
+correction.innerHTML="";
+
+correction.className="";
+
+}
+
+
+
+}
+
+
+
+
+
+
+
+
+
+// ==========================================
+// NETTOYER REPONSE
+// ==========================================
+
+
+function nettoyer(texte){
+
+
+return texte
+
+.toLowerCase()
+
+.trim()
+
+.replace(/[.,!?]/g,"");
+
+
+}
+
+
+
+
+
+
+
+
+
+// ==========================================
+// CORRECTION
+// ==========================================
+
+
+function corriger(){
+
+
+
+let input=document.getElementById(
+"reponse"
+);
+
+
+
+let zone=document.getElementById(
+"correction"
+);
+
+
+
+
+if(!input || !zone)
+
+return;
+
+
+
+
+
+let valeur=
+
+nettoyer(input.value);
+
+
+
+
+
+
+let bonne=
+
+nettoyer(
+exerciceActuel.reponse
+);
+
+
+
+
+
+
+
+if(valeur===bonne){
+
+
+
+zone.className="correct";
+
+
+
+zone.innerHTML=`
+
+<h3>
+✅ Bravo !
+</h3>
+
+
+<p>
+${exerciceActuel.pronom}
+${exerciceActuel.reponse}
+</p>
+
+
+<p>
+Verbe :
+<b>
+${exerciceActuel.verbe}
+</b>
+</p>
+
+
+<p>
+Temps :
+<b>
+${exerciceActuel.tempsTexte}
+</b>
+</p>
+
+
+`;
+
+
+
+
+
+setTimeout(()=>{
+
+
+nouvelExercice();
+
+
+},1500);
+
+
+
+
+
+}
+
+else{
+
+
+
+zone.className="incorrect";
+
+
+
+zone.innerHTML=`
+
+<h3>
+❌ Correction
+</h3>
+
+
+<p>
+Ta réponse :
+<b>
+${input.value}
+</b>
+</p>
+
+
+<hr>
+
+
+<p>
+La bonne réponse :
+</p>
+
+
+<h3>
+
+${exerciceActuel.pronom}
+
+${exerciceActuel.reponse}
+
+</h3>
+
+
+
+<p>
+
+Verbe :
+<b>
+${exerciceActuel.verbe}
+</b>
+
+</p>
+
+
+
+<p>
+
+Temps :
+<b>
+${exerciceActuel.tempsTexte}
+</b>
+
+</p>
+
+
+
+`;
+
+
+
+}
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+// ==========================================
+// RECHERCHE DANS LES TABLEAUX
+// ==========================================
+
+
+function rechercherVerbe(){
+
+
+let recherche=
+
+document
+.getElementById("recherche")
+.value
+.toLowerCase();
+
+
+
+
+document
+.querySelectorAll(".table-card")
+.forEach(card=>{
+
+
+let nom=
+
+card.querySelector("h3")
+.textContent
+.toLowerCase();
+
+
+
+
+if(
+nom.includes(recherche)
+)
+
+card.style.display="block";
+
+
+else
+
+card.style.display="none";
+
+
+
+});
+
+
+}
+
+
+
+
+
+
+
+
+
+// ==========================================
+// INITIALISATION
+// ==========================================
+
+
+document.addEventListener(
+"DOMContentLoaded",
+()=>{
+
+
+
+afficherTableaux();
+
+
+
+nouvelExercice();
+
+
+
+});
+
+
+
+
+// FIN FRANÇAIS.JS
