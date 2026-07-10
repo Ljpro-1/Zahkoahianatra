@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="mg">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Zah ko ianatra - Sehatra fianarana</title>
+<link rel="manifest" href="manifest.json">
+
+<meta name="theme-color" content="#4776E6">
+
+<link rel="stylesheet" href="style.css">
+
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+
+</head>
+
+
+<body>
+
+
+<div class="bg-circles">
+
+    <div class="circle c1"></div>
+
+    <div class="circle c2"></div>
+
+</div>
+
+
+
+
+<main class="main-wrapper">
+
+
+<div class="container">
+
+
+<section class="hero-section">
+
+
+
+<h1 class="main-title">
+Zah ko ianatra
+</h1>
+
+
+
+<p class="slogan">
+Mianatra, Mitadidy, Mampiatra
+</p>
+
+
+
+
+<div class="description-card">
+
+
+<p class="description-text">
+
+Sehatra fampianarana natao hanampiana ny mpianatra rehetra
+
+<span class="highlight">
+(Classe de primaire)
+</span>.
+
+</p>
+
+
+
+<div class="features">
+
+
+<span class="badge badge-lesona">
+📚 Misy lesona
+</span>
+
+
+<span class="badge badge-fampiharana">
+📝 Fampiharana
+</span>
+
+
+<span class="badge badge-lalao">
+🎮 Lalao
+</span>
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+<div class="cta-buttons">
+
+
+<button
+id="btn-register"
+class="btn btn-primary"
+type="button">
+
+Créer un compte
+
+</button>
+
+
+
+
+<button
+id="btn-login"
+class="btn btn-secondary"
+type="button">
+
+Se connecter
+
+</button>
+
+
+</div>
+
+
+
+
+<p id="message"></p>
+
+
+
+</section>
+
+
+</div>
+
+
+</main>
+
+
+
+
+
+
+
+
+<!-- ================= INSCRIPTION ================= -->
+
+
+<div id="register-modal" class="modal">
+
+
+<div class="modal-content">
+
+
+
+<span
+class="close-btn"
+id="close-modal">
+
+&times;
+
+</span>
+
+
+
+<h2>
+Fisoratana anarana
+</h2>
+
+
+
+
+
+<form id="register-form">
+
+
+
+
+
+<div class="form-group">
+
+<label>
+Anaran'ny zaza hianatra
+</label>
+
+
+<input
+
+type="text"
+
+id="child-name"
+
+placeholder="Ohatra: Rova Soa"
+
+required>
+
+</div>
+
+
+
+
+
+<div class="form-group">
+
+
+<label>
+Numéro téléphone
+</label>
+
+
+<input
+
+type="tel"
+
+id="parent-phone"
+
+placeholder="034 00 000 00"
+
+required>
+
+
+</div>
+
+
+
+
+
+<div class="form-group">
+
+
+<label>
+Mot de passe (6 chiffres)
+</label>
+
+
+
+<input
+
+type="password"
+
+id="password"
+
+maxlength="6"
+
+inputmode="numeric"
+
+placeholder="••••••"
+
+required>
+
+
+
+<small>
+Tadidio tsara ny teny miafinao
+</small>
+
+
+
+</div>
+
+
+
+
+
+<div class="form-group">
+
+
+<label>
+Confirmation mot de passe
+</label>
+
+
+
+<input
+
+type="password"
+
+id="confirm-password"
+
+maxlength="6"
+
+inputmode="numeric"
+
+placeholder="••••••"
+
+required>
+
+
+</div>
+
+
+
+
+
+<div class="checkbox-group">
+
+
+<input
+
+type="checkbox"
+
+id="remember-me">
+
+
+<label>
+Nampiditra information marina aho
+</label>
+
+
+</div>
+
+
+
+
+
+<button
+
+type="submit"
+
+class="btn btn-submit">
+
+Handeha hianatra 🚀
+
+</button>
+
+
+
+</form>
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+
+<!-- ================= CONNEXION ================= -->
+
+
+
+<div id="login-modal" class="modal">
+
+
+<div class="modal-content">
+
+
+
+<span
+
+class="close-btn"
+
+id="close-login">
+
+&times;
+
+</span>
+
+
+
+
+<h2>
+Se connecter
+</h2>
+
+
+
+
+
+
+<form id="login-form">
+
+
+
+
+
+<div class="form-group">
+
+
+<label>
+Numéro téléphone
+</label>
+
+
+
+<input
+
+type="tel"
+
+id="login-phone"
+
+placeholder="034 00 000 00"
+
+required>
+
+
+</div>
+
+
+
+
+
+
+<div class="form-group">
+
+
+<label>
+Mot de passe
+</label>
+
+
+
+<input
+
+type="password"
+
+id="login-password"
+
+maxlength="6"
+
+inputmode="numeric"
+
+placeholder="••••••"
+
+required>
+
+
+
+</div>
+
+
+
+<div class="checkbox-group">
+
+<input
+type="checkbox"
+id="remember-device">
+
+<label>
+Enregistrer cet appareil
+</label>
+
+</div>
+
+
+<button
+
+type="submit"
+
+class="btn btn-submit">
+
+
+Connexion 🚀
+
+
+</button>
+
+
+
+
+
+</form>
+
+
+
+</div>
+
+
+</div>
+
+
+
+
+
+
+
+
+
+<script type="module" src="app.js"></script>
+
+<!-- ================= FOOTER ================= -->
+
+<footer class="main-footer">
+
+    <button 
+        id="about-btn" 
+        class="about-btn">
+
+        📚 À propos et abonnement
+
+    </button>
+
+</footer>
+
+
+
+<!-- ================= MODAL À PROPOS ================= -->
+
+<div id="about-modal" class="about-modal">
+
+
+    <div class="about-content">
+
+
+        <span 
+            id="close-about" 
+            class="close-about">
+
+            &times;
+
+        </span>
+
+
+
+        <h2>
+            📚 À propos et abonnement
+        </h2>
+
+
+
+
+        <section>
+
+            <h3>
+                📖 À propos de l'application
+            </h3>
+
+
+            <p>
+                Ny application <strong>"Zah ko ianatra"</strong>
+                dia application natao hanampy ny mpianatra mba hahafehy
+                ny taranja any am-pianarana.
+            </p>
+
+
+            <p>
+                Ahitana lesona, exercice ary correction ao anatiny.
+            </p>
+
+
+            <p>
+                Misy taranja toy ny :
+            </p>
+
+
+            <ul>
+
+                <li>
+                    Opération : Addition, Soustraction, Multiplication, Division
+                </li>
+
+                <li>
+                    Problème
+                </li>
+
+                <li>
+                    Français : Verbe, Phrase
+                </li>
+
+                <li>
+                    Preuve par neuf
+                </li>
+
+                <li>
+                    Lettre en chiffre sy chiffre en lettre
+                </li>
+
+                <li>
+                    Conversion
+                </li>
+
+            </ul>
+
+
+        </section>
+
+
+
+
+
+        <section>
+
+            <h3>
+                📱 Fonctionnement offline
+            </h3>
+
+
+            <p>
+                Ny application dia offline izany hoe tsy mila connexion
+                internet rehefa vita ny inscription ary rehefa installé
+                amin'ny appareil.
+            </p>
+
+
+        </section>
+
+
+
+
+
+
+        <section>
+
+            <h3>
+                📝 Inscription
+            </h3>
+
+
+            <p>
+                Mandritra ny inscription dia tsara ny mampiditra
+                anarana sy numéro téléphone marina mba hanamorana
+                ny fampiasana ny application.
+            </p>
+
+
+        </section>
+
+
+
+
+
+
+        <section>
+
+            <h3>
+                🚀 Fanatsarana ho avy
+            </h3>
+
+
+            <p>
+                Atreto dia mbola vitsivitsy ny taranja ary niveau
+                primaire ihany koa.
+                Efa misy anefa ireo fanatsarana mba hisian'ny
+                taranja maro sy niveau maro.
+            </p>
+
+
+        </section>
+
+
+
+
+
+
+
+        <section class="subscription-info">
+
+
+            <h3>
+                ⭐ Abonnement
+            </h3>
+
+
+            <p>
+                Misy ny essai zany oe afaka mampiasa ny application gratuit " tsy mandoa abonnement" mandritra ny 7 andro ary rehefa tapitra ny fito andro izay vao mandoa ny abonnement.
+                Afaka atao ny mandoa ny abonnement mialon'ny date faran'ny abonnement mba tsy ho tapaka ny fampiasana ny application
+                Ny abonnement dia natao mba :
+            </p>
+
+
+            <ol>
+
+                <li>
+                    Ananan'ny application serveur manokana.
+                    Atreto manko dia mbola manofa.
+                </li>
+
+
+                <li>
+                    Ahafahana mampitombo ny mpiasa mba hahafahana
+                    manatsara ny application :
+                    taranja maro sy niveau maro.
+                </li>
+
+
+                <li>
+                    Hisian'ny fifaninana en ligne,
+                    examen en ligne ary classement ho an'ireo
+                    mpianatra mandray anjara.
+                </li>
+
+
+            </ol>
+
+
+
+
+
+            <p>
+                💰 Saran'ny abonnement :
+                <strong>
+                    4000 Ar / volana
+                    
+                    
+                    isaky ny mandoa abonnement dia velomina ny données mobiles mandrapatongan'ny validation
+                </strong>
+            </p>
+
+
+            <p>
+                Izany hoe manodidina ny 130 Ar isan'andro.
+                Kanefa afaka mampiasa ny application isan'andro
+                tsy misy fetra ary tsy mila connexion.
+                
+            </p>
+
+
+
+        </section>
+
+
+
+
+
+
+
+        <section>
+
+
+            <h3>
+                💳 Fandoavana abonnement
+            </h3>
+
+
+            <p>
+                Alefa amin'ny Airtel Money na Orange Money :
+            </p>
+
+
+            <p>
+
+                📞 033 06 088 80
+
+                <br>
+
+                📞 037 20 531 37
+
+            </p>
+
+
+
+
+            <p>
+
+                Rehefa manao abonnement dia ataovy reference mazava :
+
+                <br>
+
+                <strong>
+                    Anaran'ny mpianatra + numéro téléphone
+                    nampidirina nandritra ny inscription.
+                </strong>
+
+            </p>
+
+
+
+            <p>
+
+                Raha diso ny numéro na tsy mitovy ny anarana
+                dia tsy misokatra ny application.
+
+            </p>
+
+
+
+        </section>
+
+
+
+
+
+
+
+        <section>
+
+
+            <h3>
+                📞 Contact Support
+            </h3>
+
+
+
+            <p>
+
+                <a href="tel:+261330608880">
+                    +261 33 06 088 80
+                </a>
+
+            </p>
+
+
+
+            <p>
+
+                <a href="tel:+261372053137">
+                    +261 37 20 531 37
+                </a>
+
+            </p>
+
+
+
+            <p>
+
+                <a href="mailto:lazadiah@gmail.com">
+                    lazadiah@gmail.com
+                </a>
+
+            </p>
+
+
+        </section>
+
+
+
+
+
+
+        <p class="footer-final">
+
+            Ny application dia natao hanampy ny fianarana an-tsekoly
+            fa tsy mahasolo izany.
+
+
+            <br><br>
+
+
+            <strong>
+                Mianatra, Mitadidy, Mampiatra.
+            </strong>
+
+        </p>
+
+
+
+
+    </div>
+
+
+</div>
+<script>
+
+
+if("serviceWorker" in navigator){
+
+
+window.addEventListener("load",()=>{
+
+
+navigator.serviceWorker.register("sw.js")
+
+.then(()=>{
+
+
+console.log(
+"Service Worker activé"
+);
+
+
+})
+
+.catch(error=>{
+
+
+console.log(
+"Erreur SW:",
+error
+);
+
+
+});
+
+
+});
+
+
+}
+
+
+</script>
+</body>
+
+</html>
