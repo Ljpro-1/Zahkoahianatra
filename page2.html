@@ -1,111 +1,349 @@
 <!DOCTYPE html>
 <html lang="mg">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Zah ko ianatra - Lalao & Fianarana</title>
-    <link rel="manifest" href="manifest.json">
-    <!-- Polices éducatives et gaming de niveau 10 -->
-    <link href="https://googleapis.com" rel="stylesheet">
-    <!-- Liaison avec le fichier de style externe -->
-    <link rel="stylesheet" href="page2.css">
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>Zah ko ianatra - Lalao & Fianarana</title>
+
+
+<!-- PWA -->
+<link rel="manifest" href="manifest.json">
+
+<meta name="theme-color" content="#6366f1">
+
+
+<!-- Police éducative -->
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;700&display=swap" rel="stylesheet">
+
+
+<!-- CSS -->
+<link rel="stylesheet" href="page2.css">
+
+
 </head>
+
+
+
 <body>
 
-    <!-- Arrière-plan décoratif et immersif -->
-    <div class="bg-decor">
-        <div class="circle b1"></div>
-        <div class="circle b2"></div>
+
+<!-- Décoration arrière-plan -->
+
+<div class="bg-decor">
+
+    <div class="circle b1"></div>
+
+    <div class="circle b2"></div>
+
+</div>
+
+
+
+
+
+<!-- ================= HEADER ================= -->
+
+
+<header class="game-header">
+
+
+    <!-- Profil enfant -->
+
+    <div class="player-zone">
+
+        <div class="player-avatar" id="player-avatar">
+            ?
+        </div>
+
+
+        <div class="player-name" id="player-name">
+            ...
+        </div>
+
+
     </div>
 
-    <!-- Barre d'état Gaming Supérieure (Top Bar) -->
-    <header class="game-header">
-        <!-- Gauche : Profil de l'enfant -->
-        <div class="player-zone">
-            <div class="player-avatar" id="player-avatar">?</div>
-            <div class="player-name" id="player-name">...</div>
-        </div>
 
-        <!-- Centre : Crédit XP Fixe -->
-        <div class="credit-zone">
-            <span class="xp-icon">⚡</span>
-            <span class="xp-text">70 XP</span>
-        </div>
-<div class="subscription-zone">
-    
-    <button id="subscription-btn">
-    
-        <span class="sub-title">
-            Abonnement manaraka
+
+
+
+    <!-- XP -->
+
+    <div class="credit-zone">
+
+        <span class="xp-icon">
+            ⚡
         </span>
-        
-        <span class="sub-date">
-            --/--/----
+
+
+        <span class="xp-text">
+            70 XP
         </span>
-        
-    </button>
-    
-</div>
-        <!-- Droite : Compteur de Score Étoiles -->
 
-    </header>
 
-    <!-- Zone Centrale des Activités Éducatives -->
-    <main class="game-container">
-        <h2 class="welcome-title">Ahitana lesona, exercice ary fanazavana  🚀</h2>
-
-        <div class="menu-grid">
-            <!-- Bouton 1 : Opération (MODIFIÉ POUR LA REDIRECTION) -->
-            <button class="game-card-btn btn-operation" data-game="Opération" onclick="window.location.href='operation.html'">
-                <span class="btn-emoji">➕</span>
-                <span class="btn-label">Opération</span>
-            </button>
-
-            <!-- Bouton 2 : Problème -->
-           <!-- Bouton 2 : Problème -->
-<button class="game-card-btn btn-probleme" data-game="Problème" onclick="window.location.href='problem.html'">
-    <span class="btn-emoji">🧩</span>
-    <span class="btn-label">Problème</span>
-</button>
+    </div>
 
 
 
-            <!-- Bouton 4 : Connaissance Générale de Madagascar -->
-            <button class="game-card-btn btn-madagascar" data-game="grand défi" onclick="window.location.href='exercice.html'">
-    <span class="btn-emoji">🔎📐🗺</span>
-    <span class="btn-label">Grand Défi : Opérations, Conversions & Logique</span>
-</button>
-<!-- Bouton Français -->
+
+
+    <!-- Abonnement -->
+
+    <div class="subscription-zone">
+
+
+        <button id="subscription-btn">
+
+
+            <span class="sub-title">
+                Abonnement manaraka
+            </span>
+
+
+            <span class="sub-date">
+                --/--/----
+            </span>
+
+
+        </button>
+
+
+    </div>
+
+
+
+</header>
+
+
+
+
+
+
+
+<!-- ================= CONTENU ================= -->
+
+
+<main class="game-container">
+
+
+<h2 class="welcome-title">
+
+Ahitana lesona, exercice ary fanazavana 🚀
+
+</h2>
+
+
+
+
+
+<div class="menu-grid">
+
+
+
+
+
+<!-- Opération -->
+
 <button 
-class="game-card-btn btn-francais" 
+class="game-card-btn btn-operation"
+data-game="Opération"
+onclick="window.location.href='operation.html'">
+
+
+<span class="btn-emoji">
+➕
+</span>
+
+
+<span class="btn-label">
+Opération
+</span>
+
+
+</button>
+
+
+
+
+
+
+
+<!-- Problème -->
+
+<button 
+class="game-card-btn btn-probleme"
+data-game="Problème"
+onclick="window.location.href='problem.html'">
+
+
+<span class="btn-emoji">
+🧩
+</span>
+
+
+<span class="btn-label">
+Problème
+</span>
+
+
+</button>
+
+
+
+
+
+
+
+
+<!-- Grand défi -->
+
+<button 
+class="game-card-btn btn-madagascar"
+data-game="Grand défi"
+onclick="window.location.href='exercice.html'">
+
+
+<span class="btn-emoji">
+🔎📐🗺
+</span>
+
+
+<span class="btn-label">
+
+Grand Défi :
+Opérations, Conversions & Logique
+
+</span>
+
+
+</button>
+
+
+
+
+
+
+
+
+<!-- Français -->
+
+<button 
+class="game-card-btn btn-francais"
 data-game="Français"
 onclick="window.location.href='francais.html'">
 
-    <span class="btn-emoji">📖</span>
 
-    <span class="btn-label">
-        Français
-    </span>
+<span class="btn-emoji">
+📖
+</span>
 
-</button>       
-<button id="install-btn" class="install-btn">
-📱 Installer l'application
+
+<span class="btn-label">
+Français
+</span>
+
+
 </button>
-        </div>
-    </main>
-    <!-- Bouton retour accueil -->
+
+
+
+
+
+</div>
+
+
+
+</main>
+
+
+
+
+
+
+
+<!-- ================= FOOTER ================= -->
+
+
+<footer class="page-footer">
+
+
+
+
+
+<!-- Installer PWA -->
 
 <button 
+id="install-btn"
+class="install-btn">
+
+
+📱 Installer l'application
+
+
+</button>
+
+
+
+
+
+
+
+<!-- Retour accueil -->
+
+<button
+
 class="back-home-btn"
+
 onclick="window.location.href='index.html'">
+
 
 🏠 Retour Accueil
 
 
-    </button>
-  <button id="shareBtn" class="share-btn">
+</button>
+
+
+
+
+
+
+
+<!-- Partage -->
+
+<button 
+
+id="shareBtn"
+
+class="share-btn">
+
+
 📤 Partager ce site
-  </button>
+
+
+</button>
+
+
+
+
+
+</footer>
+
+
+
+
+
+
+
+
+
+<!-- ================= SERVICE WORKER ================= -->
+
+
 <script>
 
 
@@ -117,6 +355,7 @@ window.addEventListener("load",()=>{
 
 navigator.serviceWorker.register("sw.js")
 
+
 .then(()=>{
 
 
@@ -127,11 +366,12 @@ console.log(
 
 })
 
+
 .catch(error=>{
 
 
 console.log(
-"Erreur SW:",
+"Erreur Service Worker :",
 error
 );
 
@@ -145,13 +385,36 @@ error
 }
 
 
+
 </script>
 
-<!-- Protection abonnement -->
+
+
+
+
+
+
+<!-- ================= FIREBASE / ABONNEMENT ================= -->
+
+
 <script type="module" src="protection.js"></script>
 
-<!-- Code de la page -->
-<script src="page2.js"></script>
+
+
+
+
+
+
+<!-- ================= LOGIQUE PAGE ================= -->
+
+
+<script type="module" src="page2.js"></script>
+
+
+
+
 
 </body>
-</html>
+
+
+    </html>
