@@ -513,3 +513,22 @@ display:block;
 transform:scale(1.05);
 
 }
+.share-btn{
+    display:block;
+    width:250px;
+    margin:20px auto;
+    padding:14px;
+    border:none;
+    border-radius:50px;
+    cursor:pointer;
+    font-size:17px;
+    font-weight:bold;
+    color:#fff;
+    background:linear-gradient(135deg,#4f46e5,#06b6d4);
+    box-shadow:0 10px 25px rgba(0,0,0,.3);
+    transition:.3s;
+}
+
+.share-btn:hover{
+    transform:translateY(-3px);
+}
