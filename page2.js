@@ -440,5 +440,36 @@ window.addEventListener(
   
   
  }
- 
-);
+ );
+ document.getElementById("shareBtn").addEventListener("click", async () => {
+
+const lang = localStorage.getItem("selectedLanguage") || "fr";
+const data = translations[lang];
+
+const shareData = {
+    title: data.shareTitle,
+    text: data.shareText,
+    url: window.location.href
+};
+
+if (navigator.share) {
+
+    try{
+        await navigator.share(shareData);
+    }catch(e){}
+
+} else {
+
+    await navigator.clipboard.writeText(shareData.url);
+
+    alert(lang==="fr"
+        ? "Le lien a été copié. Vous pouvez maintenant le partager."
+        : "The link has been copied. You can now share it.");
+
+}
+
+});
+
+
+
+
