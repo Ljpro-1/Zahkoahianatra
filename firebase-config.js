@@ -8,16 +8,14 @@ getDatabase
 
 
 const firebaseConfig = {
-   apiKey: "AIzaSyCmOJF_-GER8Q5MRmhXWcfzOhXexCUQrys",
-   authDomain: "primairy-61f2f.firebaseapp.com",
-   databaseURL: "https://primairy-61f2f-default-rtdb.firebaseio.com",
-   projectId: "primairy-61f2f",
-   storageBucket: "primairy-61f2f.firebasestorage.app",
-   messagingSenderId: "71620877881",
-   appId: "1:71620877881:web:9386f616bc8782c1e2f7e8",
-   measurementId: "G-294SLT9LQV"
-  };
-
+  apiKey: "AIzaSyD8tPAbjmh68_JCuwxqdmAz2CPJb6xqcmU",
+  authDomain: "ecole-9cc95.firebaseapp.com",
+  databaseURL: "https://ecole-9cc95-default-rtdb.europe-west1.firebasedatabase.app",
+  projectId: "ecole-9cc95",
+  storageBucket: "ecole-9cc95.firebasestorage.app",
+  messagingSenderId: "466187797903",
+  appId: "1:466187797903:web:23a2a42375a3ed19c5f7fa"
+};
 const app = initializeApp(firebaseConfig);
 
 export const db = getDatabase(app);
